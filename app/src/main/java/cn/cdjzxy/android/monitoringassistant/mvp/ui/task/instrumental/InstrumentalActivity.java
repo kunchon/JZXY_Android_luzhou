@@ -110,7 +110,7 @@ public class InstrumentalActivity extends MyBaseViewPagerActivity {
         List<Fragment> list = new ArrayList<>();
         list.add(new InstrumentalBasic());
 
-        return null;
+        return list;
     }
 
     @Override
