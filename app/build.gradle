@@ -172,5 +172,5 @@ dependencies {
     implementation rootProject.ext.dependencies["superWeb"]
     implementation rootProject.ext.dependencies["MPAndroidChart"]
     implementation rootProject.ext.dependencies["superTextView"]
-    implementation project(':EasyLibrary')
+
 }
