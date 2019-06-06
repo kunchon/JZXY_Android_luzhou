@@ -78,8 +78,8 @@ import me.jessyan.autosize.utils.Preconditions;
  */
 public class TaskDetailActivity extends MyTitleActivity implements IView {
 
-    @BindView(R.id.recyclerview)
-    RecyclerView recyclerview;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.tv_task_name)
@@ -329,7 +329,7 @@ public class TaskDetailActivity extends MyTitleActivity implements IView {
      * 初始化Tab数据
      */
     private void initTaskFormData() {
-        ArtUtils.configRecyclerView(recyclerview, new LinearLayoutManager(this,
+        ArtUtils.configRecyclerView(recyclerView, new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false) {
             @Override
             public boolean canScrollVertically() {//设置RecyclerView不可滑动
@@ -364,7 +364,7 @@ public class TaskDetailActivity extends MyTitleActivity implements IView {
                         SamplingUtil.unloadSample(mSamplingList.get(position));
                     }
                 });
-        recyclerview.setAdapter(mTaskDetailAdapter);
+        recyclerView.setAdapter(mTaskDetailAdapter);
     }
 
     /**

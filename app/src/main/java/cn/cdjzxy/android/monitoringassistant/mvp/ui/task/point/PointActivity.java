@@ -60,8 +60,8 @@ import cn.cdjzxy.android.monitoringassistant.utils.rx.RxDataTool;
 
 public class PointActivity extends MyTitleActivity implements IView {
 
-    @BindView(R.id.recyclerview)
-    RecyclerView recyclerview;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
     @BindView(R.id.linear_add)
     LinearLayout linearAdd;
     private String projectId;
@@ -127,7 +127,7 @@ public class PointActivity extends MyTitleActivity implements IView {
      * 初始化Tab数据
      */
     private void initPointData() {
-        ArtUtils.configRecyclerView(recyclerview, new LinearLayoutManager(this));
+        ArtUtils.configRecyclerView(recyclerView, new LinearLayoutManager(this));
         mPointAdapter = new PointAdapter(this, mProjectDetials, mProject.getCanSamplingEidt(),
                 new PointAdapter.ItemAdapterOnClickListener() {
                     @Override
@@ -148,7 +148,7 @@ public class PointActivity extends MyTitleActivity implements IView {
 
             }
         });
-        recyclerview.setAdapter(mPointAdapter);
+        recyclerView.setAdapter(mPointAdapter);
     }
 
     @OnClick({R.id.linear_add})

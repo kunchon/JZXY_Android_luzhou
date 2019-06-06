@@ -17,23 +17,18 @@ import org.simple.eventbus.Subscriber;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 
 import cn.cdjzxy.android.monitoringassistant.R;
 import cn.cdjzxy.android.monitoringassistant.app.EventBusTags;
 import cn.cdjzxy.android.monitoringassistant.base.base.activity.MyBaseViewPagerActivity;
-import cn.cdjzxy.android.monitoringassistant.base.base.activity.MyRefreshActivity;
 import cn.cdjzxy.android.monitoringassistant.base.mvp.Message;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.other.Tab;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.Sampling;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.SamplingDetail;
-import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.user.UserInfoAppRight;
-import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.SamplingDao;
-import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.SamplingDetailDao;
 
-import cn.cdjzxy.android.monitoringassistant.mvp.presenter.ApiPresenter;
-import cn.cdjzxy.android.monitoringassistant.mvp.ui.adapter.FragmentAdapter;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.instrumental.fragment.InstrumentalBasic;
+import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.instrumental.fragment.InstrumentalRecord;
+import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.instrumental.fragment.InstrumentalRecordDetail;
 import cn.cdjzxy.android.monitoringassistant.utils.DbHelpUtils;
 import cn.cdjzxy.android.monitoringassistant.utils.SamplingUtil;
 
@@ -58,6 +53,7 @@ public class InstrumentalActivity extends MyBaseViewPagerActivity {
         titleBar.setOnLeftTextClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -108,14 +104,19 @@ public class InstrumentalActivity extends MyBaseViewPagerActivity {
     @Override
     protected List<Fragment> initFragment() {
         List<Fragment> list = new ArrayList<>();
-        list.add(new InstrumentalBasic());
-
+        InstrumentalBasic basic = new InstrumentalBasic();
+        InstrumentalRecord record = new InstrumentalRecord();
+        InstrumentalRecordDetail recordDetail = new InstrumentalRecordDetail();
+        basic.setData(mSampling);
+        list.add(basic);
+        list.add(record);
+        list.add(recordDetail);
         return list;
     }
 
     @Override
     protected void tabViewOnTabSelect(int position) {
-
+        openFragment(position, true);
     }
 
     @Override
@@ -129,7 +130,7 @@ public class InstrumentalActivity extends MyBaseViewPagerActivity {
                 tab.setResId(R.mipmap.icon_basic);
             } else if (i == FRAGMENT_ITEM_INT_RECORD) {
                 tab.setTabName("监测结果");
-                tab.setSelected(true);
+                tab.setSelected(false);
                 tab.setResId(R.mipmap.icon_basic);
             }
             tabList.add(tab);
@@ -140,7 +141,7 @@ public class InstrumentalActivity extends MyBaseViewPagerActivity {
 
     @Subscriber(tag = EventBusTags.TAG_INSTRUMENTAL_RECORD)
     private void updateCollectFragment(int position) {
-
+        openFragment(position, true);
     }
 
 

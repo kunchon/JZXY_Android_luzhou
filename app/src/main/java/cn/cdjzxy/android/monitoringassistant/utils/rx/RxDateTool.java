@@ -451,6 +451,26 @@ public class RxDateTool {
         return content;
     }
 
+    /**
+     * 将制定oldFormat格式时间date转化为想要的时间格式nowFormat
+     * 只能将长时间转化为短时间
+     *
+     * @param oldFormat 格式
+     * @param date      日期
+     * @param nowFormat 期望的时间
+     * @return
+     */
+    public static String simpleDateFormat(String oldFormat, String date, String nowFormat) {
+        if (RxDataTool.isEmpty(date)) return "";
+        try {
+            Date simpleDateFormat = new SimpleDateFormat(oldFormat).parse(date);
+            return getDate(nowFormat,simpleDateFormat);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return date;
+        }
+    }
+
     //--------------------------------------------字符串转换成时间戳-----------------------------------
 
     /**
@@ -557,7 +577,7 @@ public class RxDateTool {
             format = DATE_FORMAT_DETACH;
         try {
             return new SimpleDateFormat(format).format(date);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new SimpleDateFormat(DATE_FORMAT_DETACH).format(date);
         }
     }
