@@ -61,6 +61,24 @@ public class TagsUtils {
     }
 
     /**
+     * 根据tagId获取tag的名称
+     *
+     * @param tagId tagId
+     * @return tagId对应的名称用","隔开
+     */
+    public static String getTagsName(String... tagId) {
+        List<Tags> tagsList = DbHelpUtils.getTags(tagId);
+        StringBuffer stringBufferName = new StringBuffer();
+        for (Tags tags : tagsList) {
+            stringBufferName.append(tags.getName() + ",");
+        }
+        if (stringBufferName.lastIndexOf(",") > 0) {
+            stringBufferName.deleteCharAt(stringBufferName.lastIndexOf(","));
+        }
+        return stringBufferName.toString();
+    }
+
+    /**
      * 获取
      *
      * @return
@@ -73,7 +91,7 @@ public class TagsUtils {
     /**
      * 显示要素选择框
      */
-    public static void showAddDialog(Context context,FormSelectAdapterOnItemClick onItemClick) {
+    public static void showAddDialog(Context context, FormSelectAdapterOnItemClick onItemClick) {
         DialogPlusBuilder dialogPlusBuilder = DialogPlus.newDialog(context);
         View view = LayoutInflater.from(context).inflate(R.layout.view_dialog_tag, null);
         dialogPlusBuilder.setContentHolder(new ViewHolder(view));
@@ -81,14 +99,14 @@ public class TagsUtils {
         dialogPlusBuilder.setContentWidth(700);
         dialogPlusBuilder.setContentHeight(800);
         DialogPlus mDialogPlus = dialogPlusBuilder.create();
-        initDialogView(view, context, mDialogPlus,onItemClick);
+        initDialogView(view, context, mDialogPlus, onItemClick);
         mDialogPlus.show();
 
 
     }
 
     private static void initDialogView(View view, Context context,
-                                       DialogPlus dialogPlus,FormSelectAdapterOnItemClick onItemClick) {
+                                       DialogPlus dialogPlus, FormSelectAdapterOnItemClick onItemClick) {
         CustomTab mCustomTab = view.findViewById(R.id.tabview);
         RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
         List<Tab> tabList = new ArrayList<>();
@@ -118,7 +136,7 @@ public class TagsUtils {
         mFormSelectAdapter.setOnItemClickListener(new DefaultAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int viewType, Object data, int position) {
-                if (onItemClick!=null){
+                if (onItemClick != null) {
                     onItemClick.onItemClick(mFormSelectAdapter.getItem(position));
                 }
                 dialogPlus.dismiss();

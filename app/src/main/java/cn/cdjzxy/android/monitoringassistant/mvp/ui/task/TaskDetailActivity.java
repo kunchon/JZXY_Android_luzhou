@@ -57,6 +57,7 @@ import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.user.UserInfoAppRi
 
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.adapter.FormSelectAdapter;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.adapter.TaskDetailAdapter;
+import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.instrumental.InstrumentalActivity;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.point.PointActivity;
 import cn.cdjzxy.android.monitoringassistant.user.UserInfoHelper;
 import cn.cdjzxy.android.monitoringassistant.utils.ArtUtils;
@@ -384,10 +385,10 @@ public class TaskDetailActivity extends MyTitleActivity implements IView {
 //                //水和废水样品采集与交接记录（新都）
 //                intent.setClass(mContext, WastewaterActivity.class);
 //                break;
-//            case SamplingUtil.PATH_INSTRUMENTAL:
-//                //现场监测仪器法
-//                intent.setClass(mContext, InstrumentalActivity.class);
-//                break;
+            case SamplingUtil.PATH_INSTRUMENTAL:
+                //现场监测仪器法
+                intent.setClass(mContext, InstrumentalActivity.class);
+                break;
 //            case SamplingUtil.PATH_NOISE_FACTORY://工业企业厂界噪声监测记录
 //                intent.setClass(mContext, NoiseFactoryActivity.class);
 //                break;
@@ -396,14 +397,14 @@ public class TaskDetailActivity extends MyTitleActivity implements IView {
                 return;
         }
 
-//        if (isNewCreate) {
-//            intent.putExtra(SamplingUtil.INTENT_FORM_SELECT_ID, id);
-//        } else {
-//            intent.putExtra(SamplingUtil.INTENT_SAMPLE_ID, id);
-//        }
-//        intent.putExtra(SamplingUtil.INTENT_PROJECT_ID, mProject.getId());
-//        intent.putExtra(SamplingUtil.INTENT_IS_NEW_CREATE, isNewCreate);
-//        ArtUtils.startActivity(intent);
+        if (isNewCreate) {
+            intent.putExtra(SamplingUtil.INTENT_FORM_SELECT_ID, id);
+        } else {
+            intent.putExtra(SamplingUtil.INTENT_SAMPLE_ID, id);
+        }
+        intent.putExtra(SamplingUtil.INTENT_PROJECT_ID, mProject.getId());
+        intent.putExtra(SamplingUtil.INTENT_IS_NEW_CREATE, isNewCreate);
+        ArtUtils.startActivity(intent);
     }
 
 
@@ -413,7 +414,7 @@ public class TaskDetailActivity extends MyTitleActivity implements IView {
             case R.id.btn_sampling_point:
                 if (UserInfoHelper.get().isHavePermission(UserInfoAppRight.APP_Permission_Plan_See_Num)) {
                     Intent intent = new Intent(this, PointActivity.class);
-                    intent.putExtra("projectId", mProject.getId());
+                    intent.putExtra(SamplingUtil.INTENT_PROJECT_ID, mProject.getId());
                     startActivity(intent);
                 } else {
                     showNoPermissionDialog("才能进行采样方案查看。", UserInfoAppRight.APP_Permission_Plan_See_Name);

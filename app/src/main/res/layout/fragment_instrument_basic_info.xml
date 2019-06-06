@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/view_line" />
+
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
+            android:id="@+id/my_layout_project"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="选择项目"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line" />
+
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
+            android:id="@+id/my_layout_sampling_no"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="采样单编号"
+            app:rightTextHint="系统自动生成" />
+
+
+        <include layout="@layout/view_line" />
+
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
+            android:id="@+id/my_layout_project_name"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="监测目的"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line" />
+
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
+            android:id="@+id/my_layout_monitem_name"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="监测项目"
+            app:rightTextHint="系统自动带出" />
+
+        <include layout="@layout/view_line" />
+
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
+            android:id="@+id/my_layout_sampling_property"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="样品性质"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line" />
+
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
+            android:id="@+id/my_layout_test_user"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="监测人"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line" />
+
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
+            android:id="@+id/my_layout_start_date"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="分析开始日期"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line" />
+
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
+            android:id="@+id/my_layout_end_date"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="分析结束日期"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line" />
+
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
+            android:id="@+id/my_layout_method"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="监测方法"
+            app:rightTextHint="请选择" />
+
+
+        <include layout="@layout/view_line" />
+
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
+            android:id="@+id/my_layout_device"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="监测仪器名称、型号及编号"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line" />
+
+        <LinearLayout
+            style="@style/BasicInfoItemStyle"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/BasicInfoItemNameStyle"
+                android:text="备注" />
+
+            <EditText
+                android:id="@+id/tv_comment"
+                style="@style/BasicInfoItemEditTextStyle"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right|center"
+                android:maxLength="100" />
+
+        </LinearLayout>
+        <include layout="@layout/view_line" />
+    </LinearLayout>
+
+</ScrollView>
