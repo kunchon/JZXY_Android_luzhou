@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_line_basic_info" />
+
+    <LinearLayout
+        android:id="@+id/more_info_layout"
+        style="@style/BasicInfoItemStyle">
+
+        <TextView
+            android:id="@+id/text_view_more_arrow"
+            style="@style/BasicInfoItemNameStyle"
+            android:text="更多信息（选填）" />
+
+        <TextView
+            android:id="@+id/more_arrow"
+            style="@style/RightViewItemHintStyle"
+            android:hint=""
+            android:rotation="0"
+            android:text="" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_more_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_more_name"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:drawableRight="@mipmap/ic_has_next"
+            app:isShowRightTextView="false"
+            app:leftText="企业名称"
+            app:rightEditTextHint="请输入"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_more_address"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:drawableRight="@mipmap/ic_has_next"
+            app:isShowRightTextView="false"
+            app:leftText="企业地址"
+            app:rightEditTextHint="请输入"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_more_device"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:drawableRight="@mipmap/ic_has_next"
+            app:isShowRightTextView="false"
+            app:leftText="处理设施"
+            app:rightEditTextHint="请输入"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_more_waterbody"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:drawableRight="@mipmap/ic_has_next"
+            app:isShowRightTextView="false"
+            app:leftText="受纳水体"
+            app:rightEditTextHint="请输入"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_more_build_date"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:drawableRight="@mipmap/ic_has_next"
+            app:isShowRightTextView="true"
+            app:leftText="建设时间"
+            app:rightEditTextHint="请输入"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <RelativeLayout style="@style/BasicInfoItemStyle">
+
+            <TextView
+                android:id="@+id/text_view_more_gw"
+                style="@style/BasicInfoNextItemNameStyle"
+                android:text="是否进入管网" />
+
+            <CheckedTextView
+                android:id="@+id/more_gw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_switch_button"
+                android:checked="false" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

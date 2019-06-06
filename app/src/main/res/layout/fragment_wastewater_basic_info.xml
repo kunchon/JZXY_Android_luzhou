@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_number"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="采样单编号"
+            app:rightTextHint="系统自动生成" />
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_sample_md"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="监测目的"
+            app:rightTextHint="系统自动生成" />
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_sample_xz"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:isShowRightTextView="true"
+            app:leftText="监测性质"
+            app:rightTextHint="系统自动生成" />
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_sample_date"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:drawableRight="@mipmap/ic_has_next"
+            app:isShowRightTextView="true"
+            app:leftText="采样日期"
+            app:rightEditTextHint="请输入"
+            app:rightTextHint="请选择" />
+
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_sample_user"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:drawableRight="@mipmap/ic_has_next"
+            app:isShowRightTextView="true"
+            app:leftText="采样人"
+            app:rightEditTextHint="请输入"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_sample_property"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:drawableRight="@mipmap/ic_has_next"
+            app:isShowRightTextView="true"
+            app:leftText="样品性质"
+            app:rightEditTextHint="请输入"
+            app:rightTextHint="请选择" />
+
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_sample_point"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:drawableRight="@mipmap/ic_has_next"
+            app:isShowRightTextView="true"
+            app:leftText="采样点位"
+            app:rightEditTextHint="请输入"
+            app:rightTextHint="请选择" />
+
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            android:id="@+id/my_layout_sample_method"
+            style="@style/MyDrawableLinearLayoutItemStyle"
+            app:drawableRight="@mipmap/ic_has_next"
+            app:isShowRightTextView="true"
+            app:leftText="采样方法"
+            app:rightEditTextHint="请输入"
+            app:rightTextHint="请选择" />
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <RelativeLayout style="@style/BasicInfoItemStyle">
+
+            <TextView
+                android:id="@+id/text_view_sample_handle"
+                style="@style/BasicInfoItemNameStyle"
+                android:text="是否进入污水处理" />
+
+            <CheckedTextView
+                android:id="@+id/base_sample_handle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_switch_button"
+                android:checked="false" />
+
+        </RelativeLayout>
+
+        <!--<include layout="@layout/view_water_information" />-->
+
+        <include layout="@layout/view_weather_information" />
+
+        <include layout="@layout/view_more_information" />
+
+        <include layout="@layout/view_flow_information" />
+
+        <include layout="@layout/view_line_basic_info" />
+
+        <LinearLayout
+            style="@style/BasicInfoItemStyle"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/BasicInfoItemNameStyle"
+                android:text="备注" />
+
+            <EditText
+                android:id="@+id/base_sample_comment"
+                style="@style/BasicInfoItemEditTextStyle"
+                android:layout_weight="1"
+                android:maxLength="100" />
+
+        </LinearLayout>
+
+        <include layout="@layout/view_add_photo" />
+
+
+    </LinearLayout>
+
+</ScrollView>

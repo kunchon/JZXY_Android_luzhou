@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.Victory-Over:SuperWeb:v1.0.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/SuperWeb-v1.0.2.aar/b8ac0941be4914c375c004a03810d898/jars/libs/tbs_sdk_thirdapp_v3.6.0.1249_43610_sharewithdownload_withoutGame_obfs_20180608_114954.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/SuperWeb-v1.0.2.aar/b8ac0941be4914c375c004a03810d898/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/SuperWeb-v1.0.2.aar/b8ac0941be4914c375c004a03810d898/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/SuperWeb-v1.0.2.aar/b8ac0941be4914c375c004a03810d898/jars/libs/alipaySdk-20170922.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
