@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_login"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center_horizontal|center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_6">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_18"
+            android:text="嘉泽云移动监测"
+            android:textColor="@color/text_color_ffffff"
+            android:textSize="@dimen/text_size_34" />
+
+        <cn.cdjzxy.android.monitoringassistant.widget.ClearEditText
+            android:id="@+id/et_name"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="48dp"
+            android:drawableLeft="@mipmap/ic_login_user"
+            android:drawableRight="@drawable/delete_selector"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:hint="用户名"
+            android:inputType="textPersonName"
+            android:textColor="@color/text_color_ffffff"
+            android:textColorHint="@color/text_color_ffffff"
+            android:textSize="@dimen/text_size_20"
+            android:theme="@style/LoginEditText"
+            tools:ignore="RtlCompat,UnknownId" />
+
+        <cn.cdjzxy.android.monitoringassistant.widget.ClearEditText
+            android:id="@+id/et_pwd"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="@dimen/dp_18"
+            android:drawableLeft="@mipmap/ic_login_pwd"
+            android:drawableRight="@drawable/delete_selector"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:textColor="@color/text_color_ffffff"
+            android:textColorHint="@color/text_color_ffffff"
+            android:textSize="@dimen/text_size_20"
+            android:theme="@style/LoginEditText"
+            tools:ignore="RtlCompat" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/btn_login_selector"
+            android:text="登录"
+            android:textColor="@color/text_color_ffffff"
+            android:textSize="@dimen/text_size_20" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

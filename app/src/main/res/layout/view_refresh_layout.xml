@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    视图刷新的控件
+    功能：上拉加载，下拉刷新
+    2019/6/3 嘉泽：昆虫
+    -->
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    app:srlAccentColor="@android:color/white"
+    app:srlEnableHeaderTranslationContent="true"
+    app:srlEnableLoadMore="false"
+    app:srlPrimaryColor="@color/bg_color_2b99ff">
+
+    <com.scwang.smartrefresh.layout.header.BezierRadarHeader
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        tools:listitem="@android:layout/simple_list_item_2" />
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>
