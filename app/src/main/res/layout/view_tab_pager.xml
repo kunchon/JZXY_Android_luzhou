@@ -9,7 +9,7 @@
 
     <cn.cdjzxy.android.monitoringassistant.widget.CustomTab
         android:id="@+id/tab_view"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="match_parent" />
     <!--<android.support.v7.widget.RecyclerView-->
     <!--android:id="@+id/recycler_view"-->

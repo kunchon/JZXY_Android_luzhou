@@ -1,7 +1,5 @@
 package cn.cdjzxy.android.monitoringassistant.mvp.ui.task.fragment;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -13,7 +11,7 @@ import cn.cdjzxy.android.monitoringassistant.mvp.presenter.ApiPresenter;
 import cn.cdjzxy.android.monitoringassistant.utils.ArtUtils;
 
 public abstract class SampleBaseFragment extends BaseFragment<ApiPresenter> implements IView {
-    protected Sampling sampling;
+    protected Sampling mSampling;
 
     @Nullable
     @Override
@@ -28,18 +26,9 @@ public abstract class SampleBaseFragment extends BaseFragment<ApiPresenter> impl
 
     @Override
     public void setData(@Nullable Object data) {
-        if (data != null && data instanceof Message) {
-            switch (((Message) data).what) {
-                case 0:
-                    this.sampling = (Sampling) ((Message) data).obj;
-                    break;
-                case 1:
-
-                    break;
-                default:
-                    //do something
-                    break;
-            }
+        if (data != null && data instanceof Sampling) {
+            this.mSampling = (Sampling) data;
+            initData(null);
         }
     }
 }

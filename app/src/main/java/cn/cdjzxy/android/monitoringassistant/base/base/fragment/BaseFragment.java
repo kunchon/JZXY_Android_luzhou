@@ -32,6 +32,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cn.cdjzxy.android.monitoringassistant.R;
 import cn.cdjzxy.android.monitoringassistant.base.base.delegate.IFragment;
 import cn.cdjzxy.android.monitoringassistant.base.integration.cache.Cache;
@@ -48,6 +50,8 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
 
     private Dialog dialog;
     protected Context mContext;
+    protected Unbinder unbinder;
+
 
     @NonNull
     @Override
@@ -61,7 +65,9 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return initView(inflater, container, savedInstanceState);
+        View view = initView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -130,6 +136,11 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
+    }
 
     public void closeLoadingDialog() {
         if (null != dialog && dialog.isShowing()) {
@@ -182,5 +193,27 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
                     }
                 }).create();
         dialog.show();
+    }
+
+    /**
+     * 显示一个dialog
+     *
+     * @param title          提示标题
+     * @param message        提示消息
+     * @param pStr           右边按钮文字提示
+     * @param nStr           左边按钮文字提示
+     * @param pClickListener 右边点击事件回调
+     * @param nClickListener 左边点击事件回调
+     */
+    protected void showDialog(String title, String message,
+                              String pStr, String nStr,
+                              DialogInterface.OnClickListener pClickListener,
+                              DialogInterface.OnClickListener nClickListener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(pStr, pClickListener);
+        builder.setNegativeButton(nStr, nClickListener);
+        builder.create().show();
     }
 }

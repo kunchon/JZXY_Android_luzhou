@@ -432,7 +432,16 @@ public class DbHelpUtils {
     public static List<Tags> getTags(String... tagId) {
         return DBHelper.get().getTagsDao().queryBuilder().where(TagsDao.Properties.Id.in(tagId)).list();
     }
-
+    /**
+     * 通过{TagsDao.Properties.Id}查找数据库所有的TagsDao表
+     * TagsDao 要素分类表
+     *
+     * @param stringList 要素分类表
+     * @return Tags 要素
+     */
+    public static List<Tags> getTags(List<String> stringList) {
+        return DBHelper.get().getTagsDao().queryBuilder().where(TagsDao.Properties.Id.in(stringList)).list();
+    }
     /**
      * 获取所以的要素分类表
      *

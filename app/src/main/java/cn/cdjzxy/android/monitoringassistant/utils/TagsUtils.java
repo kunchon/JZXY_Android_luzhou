@@ -66,7 +66,7 @@ public class TagsUtils {
      * @param tagId tagId
      * @return tagId对应的名称用","隔开
      */
-    public static String getTagsName(String... tagId) {
+    public static String getTagsName(List<String> tagId) {
         List<Tags> tagsList = DbHelpUtils.getTags(tagId);
         StringBuffer stringBufferName = new StringBuffer();
         for (Tags tags : tagsList) {

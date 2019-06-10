@@ -163,7 +163,7 @@ public class SamplingUtil {
         sampling.setProjectName(project.getName());
         sampling.setProjectNo(project.getProjectNo());
         sampling.setTagId(formSelect.getTagId());
-        sampling.setTagName(TagsUtils.getTagsName(formSelect.getTagId()));//这里可能有很多tagName
+        sampling.setTagName(TagsUtils.getTagsName(RxDataTool.strToList(formSelect.getTagId())));//这里可能有很多tagName
         sampling.setMontype(project.getTypeCode());
         sampling.setFormType(formSelect.getTagParentId());
         sampling.setFormTypeName(formSelect.getFormName());
