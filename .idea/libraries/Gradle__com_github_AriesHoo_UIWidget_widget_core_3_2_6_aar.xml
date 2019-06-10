@@ -5,8 +5,6 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/widget-core-3.2.6.aar/4f0b2ef49a9aa8211d2144591a98ca54/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.AriesHoo.UIWidget/widget-core/3.2.6/f18760f726a459aed32add1a5910f3ef4097104c/widget-core-3.2.6-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

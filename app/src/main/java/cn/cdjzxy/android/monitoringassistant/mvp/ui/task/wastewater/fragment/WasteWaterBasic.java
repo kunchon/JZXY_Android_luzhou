@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cn.cdjzxy.android.monitoringassistant.R;
 import cn.cdjzxy.android.monitoringassistant.base.mvp.Message;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.fragment.SampleBaseFragment;
@@ -19,6 +21,8 @@ import cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout;
 
 public class WasteWaterBasic extends SampleBaseFragment {
 
+
+    Unbinder unbinder;
     @BindView(R.id.my_layout_number)
     MyDrawableLinearLayout base_sample_no;//采样单编号
     @BindView(R.id.my_layout_sample_md)
@@ -109,5 +113,18 @@ public class WasteWaterBasic extends SampleBaseFragment {
     @Override
     public void handleMessage(@NonNull Message message) {
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

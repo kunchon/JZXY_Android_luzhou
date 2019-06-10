@@ -5,8 +5,6 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/viewpump-1.0.0.aar/22292273cb3774aacf92a3f014a3fb2d/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.inflationx/viewpump/1.0.0/f1f2752b224ba57c59ef414682d1d813b8da2c11/viewpump-1.0.0-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

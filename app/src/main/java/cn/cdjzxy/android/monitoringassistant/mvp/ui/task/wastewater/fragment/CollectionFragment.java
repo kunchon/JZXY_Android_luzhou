@@ -11,12 +11,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cn.cdjzxy.android.monitoringassistant.R;
 import cn.cdjzxy.android.monitoringassistant.base.mvp.Message;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.fragment.SampleBaseFragment;
 
 public class CollectionFragment extends SampleBaseFragment {
 
+    Unbinder unbinder;
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
     @BindView(R.id.tv_add_parallel)
@@ -49,5 +52,18 @@ public class CollectionFragment extends SampleBaseFragment {
     @Override
     public void handleMessage(@NonNull Message message) {
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

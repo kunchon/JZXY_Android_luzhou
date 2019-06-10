@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cn.cdjzxy.android.monitoringassistant.R;
 import cn.cdjzxy.android.monitoringassistant.base.mvp.Message;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.fragment.SampleBaseFragment;
@@ -16,6 +18,7 @@ import cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout;
 public class BottleSplitDetailFragment extends SampleBaseFragment {
 
 
+    Unbinder unbinder;
     @BindView(R.id.my_layout_sample_project)
     MyDrawableLinearLayout sample_project;//监测项目
     @BindView(R.id.my_layout_sample_quantity)
@@ -47,5 +50,18 @@ public class BottleSplitDetailFragment extends SampleBaseFragment {
     @Override
     public void handleMessage(@NonNull Message message) {
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

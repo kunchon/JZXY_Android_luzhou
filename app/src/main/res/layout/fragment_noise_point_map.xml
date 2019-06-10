@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear"
+        android:layout_weight="1"
+        android:padding="@dimen/dp_6">
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height_dp_56"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/linear_add"
+            style="@style/noiseBottomStyle">
+
+            <TextView
+                style="@style/noiseBottomTextStyle"
+                android:drawableLeft="@mipmap/icon_add"
+                android:text="添加" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:id="@+id/linear_map"
+            style="@style/noiseBottomStyle">
+
+            <TextView
+                style="@style/noiseBottomTextStyle"
+                android:drawableLeft="@mipmap/icon_map"
+                android:text="地图" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:id="@+id/linear_clean"
+            style="@style/noiseBottomStyle">
+
+            <TextView
+                style="@style/noiseBottomTextStyle"
+                android:drawableLeft="@mipmap/icon_delete"
+                android:text="删除图片" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <include layout="@layout/view_line" />
+
+
+</RelativeLayout>
