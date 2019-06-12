@@ -37,7 +37,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_flow_method"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:drawableRight="@mipmap/ic_has_next"
@@ -48,7 +48,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_flow_date"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:drawableRight="@mipmap/ic_has_next"
@@ -59,7 +59,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_receive_date"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:drawableRight="@mipmap/ic_has_next"

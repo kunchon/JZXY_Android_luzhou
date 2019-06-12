@@ -38,7 +38,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_weather_state"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:drawableRight="@mipmap/ic_has_next"
@@ -50,7 +50,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_weather_temp"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:drawableRight="@mipmap/ic_has_next"
@@ -61,7 +61,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_weather_pressure"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:drawableRight="@mipmap/ic_has_next"

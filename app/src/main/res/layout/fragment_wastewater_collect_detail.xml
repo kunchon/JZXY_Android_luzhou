@@ -35,7 +35,7 @@
 
     <include layout="@layout/view_line" />
 
-    <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+    <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
         android:id="@+id/my_layout_sample_code"
         style="@style/MyDrawableLinearLayoutItemStyle"
         app:drawableRight="@mipmap/ic_has_next"
@@ -46,7 +46,7 @@
 
     <include layout="@layout/view_line_basic_info" />
 
-    <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+    <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
         android:id="@+id/my_layout_sample_time"
         style="@style/MyDrawableLinearLayoutItemStyle"
         app:drawableRight="@mipmap/ic_has_next"
@@ -57,7 +57,7 @@
 
     <include layout="@layout/view_line_basic_info" />
 
-    <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+    <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
         android:id="@+id/my_layout_sample_frequency"
         style="@style/MyDrawableLinearLayoutItemStyle"
         app:drawableRight="@mipmap/ic_has_next"
@@ -68,7 +68,7 @@
 
     <include layout="@layout/view_line_basic_info" />
 
-    <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+    <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
         android:id="@+id/my_layout_sample_quality"
         style="@style/MyDrawableLinearLayoutItemStyle"
         app:drawableRight="@mipmap/ic_has_next"
@@ -79,7 +79,7 @@
 
     <include layout="@layout/view_line_basic_info" />
 
-    <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+    <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
         android:id="@+id/my_layout_sample_monitor_items"
         style="@style/MyDrawableLinearLayoutItemStyle"
         app:drawableRight="@mipmap/ic_has_next"
@@ -90,7 +90,7 @@
 
     <include layout="@layout/view_line_basic_info" />
 
-    <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+    <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
         android:id="@+id/my_layout_sample_monitor"
         style="@style/MyDrawableLinearLayoutItemStyle"
         app:drawableRight="@mipmap/ic_has_next"
