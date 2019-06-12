@@ -1,4 +1,4 @@
-package cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.wrapper;
+package cn.cdjzxy.android.monitoringassistant.user.db.wrapper;
 
 import android.content.Context;
 import android.content.ContextWrapper;

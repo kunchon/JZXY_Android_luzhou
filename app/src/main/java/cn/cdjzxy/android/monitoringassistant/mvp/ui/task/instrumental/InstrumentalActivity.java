@@ -60,6 +60,7 @@ public class InstrumentalActivity extends MyBaseViewPagerActivity {
         titleBar.setOnLeftTextClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
             }
         });
     }

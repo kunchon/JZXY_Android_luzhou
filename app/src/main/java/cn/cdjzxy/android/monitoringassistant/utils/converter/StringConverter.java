@@ -1,4 +1,4 @@
-package cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.converter;
+package cn.cdjzxy.android.monitoringassistant.utils.converter;
 
 import org.greenrobot.greendao.converter.PropertyConverter;
 

@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.converter.StringConverter;
+import cn.cdjzxy.android.monitoringassistant.utils.converter.StringConverter;
 
 import org.greenrobot.greendao.annotation.Generated;
 

@@ -116,6 +116,9 @@
         <activity
             android:name=".mvp.ui.task.instrumental.InstrumentalActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".mvp.ui.task.SampleMonItemActivity" />
+        <activity android:name=".mvp.ui.task.UserActivity"
+            android:configChanges="orientation|keyboardHidden"/>
     </application>
 
 </manifest>
