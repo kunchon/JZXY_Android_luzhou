@@ -13,6 +13,7 @@ import cn.cdjzxy.android.monitoringassistant.utils.ArtUtils;
 public abstract class SampleBaseFragment extends BaseFragment<ApiPresenter> implements IView {
     protected Sampling mSampling;
 
+
     @Nullable
     @Override
     public ApiPresenter obtainPresenter() {

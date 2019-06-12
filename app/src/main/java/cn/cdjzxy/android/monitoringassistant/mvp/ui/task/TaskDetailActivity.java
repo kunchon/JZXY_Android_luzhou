@@ -59,6 +59,8 @@ import cn.cdjzxy.android.monitoringassistant.mvp.ui.adapter.FormSelectAdapter;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.adapter.TaskDetailAdapter;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.instrumental.InstrumentalActivity;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.point.PointActivity;
+import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.precipitation.PrecipitationActivity;
+import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.wastewater.WasteWaterActivity;
 import cn.cdjzxy.android.monitoringassistant.user.UserInfoHelper;
 import cn.cdjzxy.android.monitoringassistant.utils.ArtUtils;
 import cn.cdjzxy.android.monitoringassistant.utils.DbHelpUtils;
@@ -377,14 +379,14 @@ public class TaskDetailActivity extends MyTitleActivity implements IView {
     private void startSampleActivity(String formPath, String id, boolean isNewCreate) {
         Intent intent = new Intent();
         switch (formPath) {
-//            case SamplingUtil.PATH_PRECIPITATION:
-//                //降水采样及样品交接记录（新都）
-//                intent.setClass(mContext, PrecipitationActivity.class);
-//                break;
-//            case SamplingUtil.PATH_WASTE_WATER:
-//                //水和废水样品采集与交接记录（新都）
-//                intent.setClass(mContext, WastewaterActivity.class);
-//                break;
+            case SamplingUtil.PATH_PRECIPITATION:
+                //降水采样及样品交接记录（新都）
+                intent.setClass(mContext, PrecipitationActivity.class);
+                break;
+            case SamplingUtil.PATH_WASTE_WATER:
+                //水和废水样品采集与交接记录（新都）
+                intent.setClass(mContext, WasteWaterActivity.class);
+                break;
             case SamplingUtil.PATH_INSTRUMENTAL:
                 //现场监测仪器法
                 intent.setClass(mContext, InstrumentalActivity.class);
