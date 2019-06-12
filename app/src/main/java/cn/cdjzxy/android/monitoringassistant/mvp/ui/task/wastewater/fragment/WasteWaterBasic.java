@@ -21,8 +21,6 @@ import cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout;
 
 public class WasteWaterBasic extends SampleBaseFragment {
 
-
-    Unbinder unbinder;
     @BindView(R.id.my_layout_number)
     MyDrawableLinearLayout base_sample_no;//采样单编号
     @BindView(R.id.my_layout_sample_md)
@@ -118,7 +116,6 @@ public class WasteWaterBasic extends SampleBaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
 

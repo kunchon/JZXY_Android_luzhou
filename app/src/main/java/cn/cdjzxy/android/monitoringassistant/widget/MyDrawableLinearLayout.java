@@ -138,14 +138,19 @@ public class MyDrawableLinearLayout extends LinearLayout {
     }
 
     public void setRightTextViewDrawableRight(int i) {
-        if (i == -1) return;
         Drawable drawable;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            drawable = getContext().getDrawable(i);
+        if (i == -1) {
+            return;
         } else {
-            drawable = getContext().getResources().getDrawable(i);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                drawable = getContext().getDrawable(i);
+            } else {
+                drawable = getContext().getResources().getDrawable(i);
+            }
         }
-        rightTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, drawable, null);
+        if (rightTextView != null)
+            rightTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, drawable, null);
+
     }
 
     public void setHasDataDrawable(Drawable hasDataDrawable) {

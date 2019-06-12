@@ -83,7 +83,20 @@ public class DbHelpUtils {
         return DBHelper.get().getSamplingDao().queryBuilder().
                 where(SamplingDao.Properties.Id.eq(id)).unique();
     }
-
+    /**
+     * 通过{@SamplingDao.Properties.Id}查找Sampling表
+     * Sampling 采样表
+     *
+     * @param projectId 项目id
+     * @return Sampling 采样表
+     */
+    public static List<Sampling> getDbSampling(String projectId,String path) {
+        if (RxDataTool.isEmpty(projectId)) return new ArrayList<>();
+        return DBHelper.get().getSamplingDao().queryBuilder().
+                where(SamplingDao.Properties.ProjectId.eq(projectId),
+                        SamplingDao.Properties.FormPath.eq(path)).
+                orderDesc(SamplingDao.Properties.SamplingNo).list();
+    }
     /**
      * 查找是否存在相同采样单id的采样单
      * 通过{@SamplingDao.Properties.SamplingNo}查找Sampling表

@@ -135,7 +135,7 @@ public class WasteWaterActivity extends MyBaseViewPagerActivity {
 
     @Override
     public void setTitleBar(TitleBarView titleBar) {
-
+        titleBar.setTitleMainText("水和废水采样及交接记录");
     }
 
     @Override
