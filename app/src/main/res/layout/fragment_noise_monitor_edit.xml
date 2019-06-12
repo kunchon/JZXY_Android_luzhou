@@ -46,7 +46,7 @@
 
             <include layout="@layout/view_line" />
 
-            <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                 android:id="@+id/my_layout_monitor_address"
                 style="@style/MyDrawableLinearLayoutItemStyle"
                 app:drawableRight="@mipmap/ic_has_next"
@@ -89,7 +89,7 @@
                 android:visibility="gone"
                 tools:visibility="visible">
 
-                <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+                <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                     android:id="@+id/my_layout_monitor_date"
                     style="@style/MyDrawableLinearLayoutItemStyle"
                     app:drawableRight="@mipmap/ic_has_next"
@@ -100,7 +100,7 @@
 
                 <include layout="@layout/view_line" />
 
-                <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+                <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                     android:id="@+id/my_layout_monitor_time_first_start"
                     style="@style/MyDrawableLinearLayoutItemStyle"
                     app:drawableRight="@mipmap/ic_has_next"
@@ -111,7 +111,7 @@
 
                 <include layout="@layout/view_line" />
 
-                <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+                <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                     android:id="@+id/my_layout_monitor_time_first_end"
                     style="@style/MyDrawableLinearLayoutItemStyle"
                     app:drawableRight="@mipmap/ic_has_next"
@@ -122,7 +122,7 @@
 
                 <include layout="@layout/view_line" />
 
-                <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+                <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                     android:id="@+id/my_layout_monitor_data"
                     style="@style/MyDrawableLinearLayoutItemStyle"
                     app:drawableRight="@mipmap/ic_has_next"
@@ -133,7 +133,7 @@
 
                 <include layout="@layout/view_line" />
 
-                <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+                <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                     android:id="@+id/my_layout_monitor_time_start"
                     style="@style/MyDrawableLinearLayoutItemStyle"
                     app:drawableRight="@mipmap/ic_has_next"
@@ -144,7 +144,7 @@
 
                 <include layout="@layout/view_line" />
 
-                <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+                <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                     android:id="@+id/my_layout_monitor_time_end"
                     style="@style/MyDrawableLinearLayoutItemStyle"
                     app:drawableRight="@mipmap/ic_has_next"
@@ -155,7 +155,7 @@
 
                 <include layout="@layout/view_line" />
 
-                <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+                <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                     android:id="@+id/my_layout_bg_data"
                     style="@style/MyDrawableLinearLayoutItemStyle"
                     app:drawableRight="@mipmap/ic_has_next"
@@ -167,7 +167,7 @@
 
                 <include layout="@layout/view_line" />
 
-                <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+                <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                     android:id="@+id/my_layout_monitor_edit_data"
                     style="@style/MyDrawableLinearLayoutItemStyle"
                     app:drawableRight="@mipmap/ic_has_next"

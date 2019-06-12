@@ -16,7 +16,7 @@
         android:fitsSystemWindows="true"
         android:orientation="horizontal">
 
-        <cn.cdjzxy.monitoringassistant.widgets.CustomTab
+        <cn.cdjzxy.android.monitoringassistant.widget.CustomTab
             android:id="@+id/tab_view"
             android:layout_width="166dp"
             android:layout_height="match_parent" />
@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:background="@color/dc_c1c1c1" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.NoScrollViewPager
+        <cn.cdjzxy.android.monitoringassistant.widget.NoScrollViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.cdjzxy.android.monitoringassistant.R;
 import cn.cdjzxy.android.monitoringassistant.base.base.delegate.IActivity;
 import cn.cdjzxy.android.monitoringassistant.base.mvp.IPresenter;
@@ -42,14 +43,18 @@ public abstract class MyBaseViewPagerActivity extends MyTitleActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //initRcView();
-        tabView.setTabs(initTabData());
-        tabView.setOnTabSelectListener(new CustomTab.OnTabSelectListener() {
-            @Override
-            public void onTabSelected(Tab tab, int position) {
-                tabViewOnTabSelect(position);
-                // openFragment(position, viewPagerSetCurrentItem());
-            }
-        });
+        if (tabView != null) {
+
+            tabView.setTabs(initTabData());
+            tabView.setOnTabSelectListener(new CustomTab.OnTabSelectListener() {
+                @Override
+                public void onTabSelected(Tab tab, int position) {
+                    tabViewOnTabSelect(position);
+                    // openFragment(position, viewPagerSetCurrentItem());
+                }
+            });
+
+        }
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), initFragment());
         viewPager.setAdapter(mFragmentAdapter);
         viewPager.setOffscreenPageLimit(3);

@@ -49,7 +49,7 @@
 
             <include layout="@layout/view_line" />
 
-            <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                 android:id="@+id/my_layout_sample_code"
                 style="@style/MyDrawableLinearLayoutItemStyle"
                 app:isShowRightTextView="true"
@@ -59,7 +59,7 @@
 
             <include layout="@layout/view_line_basic_info" />
 
-            <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                 android:id="@+id/my_layout_frequency"
                 style="@style/MyDrawableLinearLayoutItemStyle"
                 app:isShowRightTextView="true"
@@ -69,7 +69,7 @@
 
             <include layout="@layout/view_line_basic_info" />
 
-            <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                 android:id="@+id/my_layout_start_time"
                 style="@style/MyDrawableLinearLayoutItemStyle"
                 app:isShowRightTextView="true"
@@ -79,7 +79,7 @@
 
             <include layout="@layout/view_line_basic_info" />
 
-            <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                 android:id="@+id/my_layout_end_time"
                 style="@style/MyDrawableLinearLayoutItemStyle"
                 app:isShowRightTextView="true"
@@ -89,7 +89,7 @@
 
             <include layout="@layout/view_line_basic_info" />
 
-            <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                 android:id="@+id/my_layout_precipitation"
                 style="@style/MyDrawableLinearLayoutItemStyle"
                 app:isShowRightTextView="false"
@@ -99,7 +99,7 @@
 
             <include layout="@layout/view_line_basic_info" />
 
-            <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+            <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
                 android:id="@+id/my_layout_rainwater_volume"
                 style="@style/MyDrawableLinearLayoutItemStyle"
                 app:isShowRightTextView="false"

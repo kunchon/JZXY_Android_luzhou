@@ -33,7 +33,6 @@ import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.msg.Msg;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.other.Tab;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.adapter.FragmentAdapter;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.adapter.MainTabAdapter;
-import cn.cdjzxy.android.monitoringassistant.mvp.ui.easy.EasyPusherActivity;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.msg.MsgActivity;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.scan.ScanCodeActivity;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.setting.PwdModifyFragment;
@@ -316,7 +315,7 @@ public class MainActivity extends MyTitleActivity {
 //                startWebActivity("https://www.amap.com/", "点位地图");
 //                break;
             case INT_EASY_PUSH:
-                startActivity(new Intent(this, EasyPusherActivity.class));
+//                startActivity(new Intent(this, EasyPusherActivity.class));
                 break;
             case INT_SET:
                 openFragment(INT_FRAGMENT_SET);
