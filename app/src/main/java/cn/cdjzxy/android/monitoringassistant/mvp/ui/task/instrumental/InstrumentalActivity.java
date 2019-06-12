@@ -147,7 +147,7 @@ public class InstrumentalActivity extends MyBaseViewPagerActivity {
 
     @Subscriber(tag = EventBusTags.TAG_INSTRUMENTAL_RECORD)
     private void updateCollectFragment(int position) {
-openFragment(position,true);
+        openFragment(position, true);
     }
 
 

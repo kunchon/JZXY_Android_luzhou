@@ -9,11 +9,14 @@ import android.widget.LinearLayout;
 
 import com.aries.ui.view.title.TitleBarView;
 
+import org.simple.eventbus.Subscriber;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import cn.cdjzxy.android.monitoringassistant.R;
+import cn.cdjzxy.android.monitoringassistant.app.EventBusTags;
 import cn.cdjzxy.android.monitoringassistant.base.base.activity.MyBaseViewPagerActivity;
 import cn.cdjzxy.android.monitoringassistant.base.mvp.Message;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.other.Tab;
@@ -39,7 +42,6 @@ public class PrecipitationActivity extends MyBaseViewPagerActivity {
     private PrecipitationBasic mBasicFragment;
     private CollectionFragment mCollectionFragment;
     private CollectionDetailFragment mCollectionDetailFragment;
-    private List<Fragment> mFragments;
 
     @Override
     protected boolean viewPagerSetCurrentItem() {
@@ -48,7 +50,10 @@ public class PrecipitationActivity extends MyBaseViewPagerActivity {
 
     @Override
     protected List<Fragment> initFragment() {
-        mFragments=new ArrayList<>();
+        List<Fragment> mFragments=new ArrayList<>();
+        mBasicFragment=new PrecipitationBasic();
+        mCollectionFragment=new CollectionFragment();
+        mCollectionDetailFragment=new CollectionDetailFragment();
         mFragments.add(mBasicFragment);
         mFragments.add(mCollectionFragment);
         mFragments.add(mCollectionDetailFragment);
@@ -57,7 +62,7 @@ public class PrecipitationActivity extends MyBaseViewPagerActivity {
 
     @Override
     protected void tabViewOnTabSelect(int position) {
-
+        openFragment(position, true);
     }
 
     @Override
@@ -104,6 +109,12 @@ public class PrecipitationActivity extends MyBaseViewPagerActivity {
     @Override
     public void handleMessage(@NonNull Message message) {
 
+    }
+
+
+    @Subscriber(tag = EventBusTags.TAG_INSTRUMENTAL_RECORD)
+    private void updateCollectFragment(int position) {
+        openFragment(position, true);
     }
 
     /**

@@ -37,15 +37,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".mvp.ui.task.noise.activity.NoisePointPicActivity"/>
-        <activity android:name=".mvp.ui.task.noise.activity.NoiseFactoryActivity" />
-        <activity android:name=".mvp.ui.task.device.DeviceActivity" />
-        <activity android:name=".mvp.ui.task.precipitation.PrecipitationActivity" >
+        <activity android:name=".mvp.ui.task.noise.activity.NoisePointPicActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".mvp.ui.task.noise.activity.NoiseFactoryActivity" >
+        </activity>
+        <activity android:name=".mvp.ui.task.device.DeviceActivity" />
+        <activity android:name=".mvp.ui.task.precipitation.PrecipitationActivity" >
         </activity>
         <activity android:name=".mvp.ui.task.wastewater.WasteWaterActivity" />
 
