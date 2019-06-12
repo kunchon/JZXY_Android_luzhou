@@ -6,8 +6,9 @@ import org.greenrobot.greendao.database.Database;
 
 import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.DaoMaster;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.DaoSession;
-import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.wrapper.GreenDaoContext;
+
 import cn.cdjzxy.android.monitoringassistant.user.UserInfoHelper;
+import cn.cdjzxy.android.monitoringassistant.user.db.wrapper.GreenDaoContext;
 
 
 public class DBHelper {

@@ -9,7 +9,7 @@ import org.greenrobot.greendao.internal.DaoConfig;
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
 
-import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.converter.StringConverter;
+import cn.cdjzxy.android.monitoringassistant.utils.converter.StringConverter;
 import java.util.List;
 
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.SamplingFormStand;
