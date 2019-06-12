@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_number"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:isShowRightTextView="true"
@@ -19,7 +19,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_sample_md"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:isShowRightTextView="true"
@@ -28,7 +28,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_sample_xz"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:isShowRightTextView="true"
@@ -37,7 +37,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_sample_date"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:drawableRight="@mipmap/ic_has_next"
@@ -49,7 +49,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_sample_user"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:drawableRight="@mipmap/ic_has_next"
@@ -60,7 +60,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_sample_property"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:drawableRight="@mipmap/ic_has_next"
@@ -72,7 +72,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_sample_point"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:drawableRight="@mipmap/ic_has_next"
@@ -84,7 +84,7 @@
 
         <include layout="@layout/view_line_basic_info" />
 
-        <cn.cdjzxy.monitoringassistant.widgets.MyDrawableLinearLayout
+        <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_sample_method"
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:drawableRight="@mipmap/ic_has_next"

@@ -34,6 +34,8 @@ import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.SamplingDetailDa
 import cn.cdjzxy.android.monitoringassistant.mvp.presenter.ApiPresenter;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.adapter.FragmentAdapter;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.instrumental.fragment.InstrumentalBasic;
+import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.instrumental.fragment.InstrumentalRecord;
+import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.instrumental.fragment.InstrumentalRecordDetail;
 import cn.cdjzxy.android.monitoringassistant.utils.DbHelpUtils;
 import cn.cdjzxy.android.monitoringassistant.utils.SamplingUtil;
 
@@ -108,14 +110,19 @@ public class InstrumentalActivity extends MyBaseViewPagerActivity {
     @Override
     protected List<Fragment> initFragment() {
         List<Fragment> list = new ArrayList<>();
-        list.add(new InstrumentalBasic());
-
+        InstrumentalBasic basic = new InstrumentalBasic();
+        InstrumentalRecord record = new InstrumentalRecord();
+        InstrumentalRecordDetail recordDetail = new InstrumentalRecordDetail();
+        basic.setData(mSampling);
+        list.add(basic);
+        list.add(record);
+        list.add(recordDetail);
         return list;
     }
 
     @Override
     protected void tabViewOnTabSelect(int position) {
-
+        openFragment(position, true);
     }
 
     @Override
@@ -129,8 +136,8 @@ public class InstrumentalActivity extends MyBaseViewPagerActivity {
                 tab.setResId(R.mipmap.icon_basic);
             } else if (i == FRAGMENT_ITEM_INT_RECORD) {
                 tab.setTabName("监测结果");
-                tab.setSelected(true);
-                tab.setResId(R.mipmap.icon_basic);
+                tab.setSelected(false);
+                tab.setResId(R.mipmap.icon_monotor);
             }
             tabList.add(tab);
         }
