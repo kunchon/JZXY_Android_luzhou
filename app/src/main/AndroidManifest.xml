@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="cn.cdjzxy.android.monitoringassistant">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -34,11 +35,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".mvp.ui.task.noise.activity.NoisePointPicActivity"></activity>
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".mvp.ui.task.noise.activity.NoisePointPicActivity"/>
         <activity android:name=".mvp.ui.task.noise.activity.NoiseFactoryActivity" />
         <activity android:name=".mvp.ui.task.device.DeviceActivity" />
-        <activity android:name=".mvp.ui.task.precipitation.PrecipitationActivity" />
+        <activity android:name=".mvp.ui.task.precipitation.PrecipitationActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".mvp.ui.task.wastewater.WasteWaterActivity" />
 
         <meta-data
@@ -57,20 +65,17 @@
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@style/AppTransparentTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".mvp.ui.MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".mvp.ui.easy.EasyPusherActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".mvp.ui.scan.ScanCodeActivity"

@@ -315,6 +315,7 @@ public class MainActivity extends MyTitleActivity {
 //                startWebActivity("https://www.amap.com/", "点位地图");
 //                break;
             case INT_EASY_PUSH:
+//                startActivity(new Intent(this, EasyPusherActivity.class));
                 break;
             case INT_SET:
                 openFragment(INT_FRAGMENT_SET);
