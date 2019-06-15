@@ -1,4 +1,4 @@
-package cn.cdjzxy.android.monitoringassistant.mvp.ui.task;
+package cn.cdjzxy.android.monitoringassistant.mvp.ui.task.activity;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -8,8 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -17,8 +15,6 @@ import android.widget.CompoundButton;
 
 import com.aries.ui.view.title.TitleBarView;
 import com.baidu.mapapi.NetworkUtil;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 
 
 import java.util.ArrayList;
@@ -28,14 +24,11 @@ import butterknife.BindView;
 import cn.cdjzxy.android.monitoringassistant.R;
 import cn.cdjzxy.android.monitoringassistant.base.base.DefaultAdapter;
 import cn.cdjzxy.android.monitoringassistant.base.base.activity.MyRefreshActivity;
-import cn.cdjzxy.android.monitoringassistant.base.base.activity.MyTitleActivity;
-import cn.cdjzxy.android.monitoringassistant.base.mvp.IView;
 import cn.cdjzxy.android.monitoringassistant.base.mvp.Message;
 import cn.cdjzxy.android.monitoringassistant.mvp.presenter.ApiPresenter;
 
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.project.Project;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.user.UserInfoAppRight;
-import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.ProjectDao;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.adapter.TaskAdapter;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.scan.ScanCodeActivity;
 import cn.cdjzxy.android.monitoringassistant.services.TraceService;

@@ -1,4 +1,4 @@
-package cn.cdjzxy.android.monitoringassistant.mvp.ui.task.point;
+package cn.cdjzxy.android.monitoringassistant.mvp.ui.task.activity;
 
 import android.app.Activity;
 import android.content.Intent;

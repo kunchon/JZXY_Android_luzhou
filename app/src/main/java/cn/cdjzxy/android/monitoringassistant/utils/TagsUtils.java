@@ -12,10 +12,12 @@ import java.util.List;
 
 import cn.cdjzxy.android.monitoringassistant.R;
 import cn.cdjzxy.android.monitoringassistant.base.base.DefaultAdapter;
+import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.base.MonItems;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.base.Tags;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.other.Tab;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.Form;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.FormSelect;
+import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.Sampling;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.TagsDao;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.adapter.FormSelectAdapter;
 import cn.cdjzxy.android.monitoringassistant.user.db.DBHelper;
@@ -78,6 +80,29 @@ public class TagsUtils {
         return stringBufferName.toString();
     }
 
+
+    /**
+     * 根据itemId获取监测项目对应的name
+     *
+     * @param itemId
+     * @param mSample
+     * @return
+     */
+    public static String getMonItemNameById(String itemId, Sampling mSample) {
+        Tags tags =DbHelpUtils.getTags(mSample.getParentTagId());
+        List<MonItems> monItems = tags.getMMonItems();
+        if (!RxDataTool.isEmpty(monItems)) {
+            for (MonItems monItem : monItems) {
+                if (!RxDataTool.isEmpty(monItem.getId())
+                        && !RxDataTool.isEmpty(itemId)
+                        && monItem.getId().equals(itemId)) {
+                    return monItem.getName();
+                }
+            }
+        }
+        //return null;
+        return "";
+    }
     /**
      * 获取
      *
@@ -101,7 +126,6 @@ public class TagsUtils {
         DialogPlus mDialogPlus = dialogPlusBuilder.create();
         initDialogView(view, context, mDialogPlus, onItemClick);
         mDialogPlus.show();
-
 
     }
 

@@ -1,4 +1,4 @@
-package cn.cdjzxy.android.monitoringassistant.mvp.ui.task;
+package cn.cdjzxy.android.monitoringassistant.mvp.ui.task.activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -131,7 +131,7 @@ public class TaskDetailActivity extends MyTitleActivity implements IView {
         initTaskFormData();
         if (NetworkUtil.isNetworkAvailable(mContext)) {
             //请求网络数据  采样单和表单分类
-
+            initTabLayout();
         } else {
             initTabLayout();
         }

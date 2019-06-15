@@ -18,6 +18,7 @@ public class DeviceActivity extends BaseActivity {
     RecyclerView recyclerViewPoint;
     @BindView(R.id.tabview)
     CustomTab tabview;
+    public static final String METHOD_ID="methodId";//方法id
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {

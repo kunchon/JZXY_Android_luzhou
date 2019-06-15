@@ -6,16 +6,25 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.base.EnterRelatePoint;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.base.EnvirPoint;
+import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.base.Methods;
+import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.base.MonItemMethodRelation;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.base.Tags;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.base.User;
+import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.base.Weather;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.msg.Msg;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.project.Project;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.Form;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.SamplingFile;
+import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.SamplingStantd;
+import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.EnterRelatePointDao;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.EnvirPointDao;
+import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.MethodsDao;
+import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.MonItemMethodRelationDao;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.MsgDao;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.SamplingFileDao;
+import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.SamplingStantdDao;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.TagsDao;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.greendao.UserDao;
 import cn.cdjzxy.android.monitoringassistant.user.UserInfoHelper;
@@ -79,10 +88,14 @@ public class DbHelpUtils {
      * @return Sampling 采样表
      */
     public static Sampling getDbSampling(String id) {
-        if (RxDataTool.isEmpty(id)) return new Sampling();
+        if (RxDataTool.isEmpty(id)) {
+            Log.e(TAG, "getDbSampling:数据库查找采样单id为空");
+            return new Sampling();
+        }
         return DBHelper.get().getSamplingDao().queryBuilder().
                 where(SamplingDao.Properties.Id.eq(id)).unique();
     }
+
     /**
      * 通过{@SamplingDao.Properties.Id}查找Sampling表
      * Sampling 采样表
@@ -90,13 +103,14 @@ public class DbHelpUtils {
      * @param projectId 项目id
      * @return Sampling 采样表
      */
-    public static List<Sampling> getDbSampling(String projectId,String path) {
+    public static List<Sampling> getDbSampling(String projectId, String path) {
         if (RxDataTool.isEmpty(projectId)) return new ArrayList<>();
         return DBHelper.get().getSamplingDao().queryBuilder().
                 where(SamplingDao.Properties.ProjectId.eq(projectId),
                         SamplingDao.Properties.FormPath.eq(path)).
                 orderDesc(SamplingDao.Properties.SamplingNo).list();
     }
+
     /**
      * 查找是否存在相同采样单id的采样单
      * 通过{@SamplingDao.Properties.SamplingNo}查找Sampling表
@@ -152,6 +166,35 @@ public class DbHelpUtils {
     }
 
     /**
+     * 通过Id查找 SamplingContent
+     *
+     * @param id 主键id
+     * @return SamplingContent
+     */
+    public static SamplingContent getSamplingContent(String id) {
+        return DBHelper.get().getSamplingContentDao().queryBuilder().where(
+                SamplingContentDao.Properties.Id.eq(id)).unique();
+    }
+
+    /**
+     * 查找平行样
+     *
+     * @param projectId
+     * @param samplingId
+     * @param frequecyNo
+     * @return
+     */
+    public static SamplingContent getSamplingContent(String projectId, String samplingId,
+                                                     int frequecyNo) {
+        return DBHelper.get().getSamplingContentDao().
+                queryBuilder().where(SamplingContentDao.Properties.ProjectId.
+                eq(projectId), SamplingContentDao.Properties.SamplingId.
+                eq(samplingId), SamplingContentDao.Properties.FrequecyNo.
+                eq(frequecyNo), SamplingContentDao.Properties.SamplingType
+                .eq(1)).unique();
+    }
+
+    /**
      * 通过{@SamplingContentDao{@ProjectId,SamplingId,SampingCode,SamplingType }}查找SamplingContent表
      * SamplingContent 采样单数据表
      *
@@ -161,8 +204,8 @@ public class DbHelpUtils {
      * @param samplingType 样品类型
      * @return SamplingContent 采样单数据表
      */
-    public static List<SamplingContent> getSamplingContent(String projectId, String samplingId,
-                                                           String samplingCode, int samplingType) {
+    public static List<SamplingContent> getSamplingContentList(String projectId, String samplingId,
+                                                               String samplingCode, int samplingType) {
         List<SamplingContent> contentList = DBHelper.get().
                 getSamplingContentDao().queryBuilder().
                 where(SamplingContentDao.Properties.ProjectId.eq(projectId),
@@ -180,7 +223,7 @@ public class DbHelpUtils {
      * @param samplingId 采样单id
      * @return SamplingContent 采样单数据表
      */
-    public static List<SamplingContent> getSamplingContent(String projectId, String samplingId) {
+    public static List<SamplingContent> getSamplingContentList(String projectId, String samplingId) {
         List<SamplingContent> contentList = DBHelper.get().
                 getSamplingContentDao().queryBuilder().
                 where(SamplingContentDao.Properties.ProjectId.eq(projectId),
@@ -195,7 +238,7 @@ public class DbHelpUtils {
      * @param samplingId 采样单id
      * @return SamplingContent 采样单数据表
      */
-    public static List<SamplingContent> getSamplingContent(String samplingId) {
+    public static List<SamplingContent> getSamplingContentList(String samplingId) {
         List<SamplingContent> contentList = DBHelper.get().
                 getSamplingContentDao().queryBuilder().
                 where(SamplingContentDao.Properties.SamplingId.eq(samplingId)).list();
@@ -240,7 +283,7 @@ public class DbHelpUtils {
      * @param itemId     监测项目id
      * @return List<SamplingFormStand>：查询所有的分瓶信息表
      */
-    public static List<SamplingFormStand> getSamplingStanTdList(String samplingId, String itemId) {
+    public static List<SamplingFormStand> getSamplingFormStanTdList(String samplingId, String itemId) {
         List<SamplingFormStand>
                 stanTdList = DBHelper.get().getSamplingFormStandDao().queryBuilder()
                 .where(SamplingFormStandDao.Properties.SamplingId.eq(samplingId),
@@ -317,6 +360,26 @@ public class DbHelpUtils {
     }
 
     /**
+     * 按照{@ProjectContentDao.Properties{@ProjectId,AddressId,TagId}}查找数据库所有的ProjectDetialDao表
+     * ProjectDetial 任务数据表
+     *
+     * @param projectId 任务id
+     * @param tagId     要素ID
+     * @return List<ProjectDetial>：查询所有的任务数据表
+     */
+    public static List<ProjectDetial> getProjectDetialList(String projectId, String tagId) {
+        if (projectId == null || projectId.equals("")) return new ArrayList<>();
+        List<ProjectDetial> projectDetialList = DBHelper.get().getProjectDetialDao().queryBuilder()
+                .where(ProjectDetialDao.Properties.ProjectId.eq(projectId),
+                        ProjectDetialDao.Properties.TagId.eq(tagId)).list();
+        if (projectDetialList == null) {
+            return new ArrayList<>();
+        } else {
+            return projectDetialList;
+        }
+    }
+
+    /**
      * 按照{@ProjectContentDao.Properties@ProjectId}查找数据库所有的ProjectDetialDao表
      * ProjectDetial 任务数据表
      *
@@ -334,32 +397,6 @@ public class DbHelpUtils {
         }
     }
 
-
-    /**
-     * 按照{@SamplingContentDao.Properties{@SamplingId,ProjectId}}查找数据库所有的SamplingContentDao表
-     * SamplingContent 样品采集列表
-     *
-     * @param samplingId 采样单id
-     * @param projectId  任务id
-     * @return List<SamplingContent>：样品采集列表
-     */
-    public static List<SamplingContent> getSamplingContentList(String samplingId, String projectId) {
-        return DBHelper.get().getSamplingContentDao().queryBuilder().
-                where(SamplingContentDao.Properties.SamplingId.eq(samplingId),
-                        SamplingContentDao.Properties.ProjectId.eq(projectId)).list();
-    }
-
-    /**
-     * 按照{@SamplingContentDao.Properties{@SamplingId}}查找数据库所有的SamplingContentDao表
-     * SamplingContent 样品采集列表
-     *
-     * @param samplingId 采样单id
-     * @return List<SamplingContent>：样品采集列表
-     */
-    public static List<SamplingContent> getSamplingContentList(String samplingId) {
-        return DBHelper.get().getSamplingContentDao().queryBuilder().
-                where(SamplingContentDao.Properties.SamplingId.eq(samplingId)).list();
-    }
 
     /**
      * 通过{@SamplingContentDao{@ProjectId,SamplingId }}查找数据库所有的SamplingDetailDao表
@@ -390,6 +427,43 @@ public class DbHelpUtils {
                 SamplingDetailDao.Properties.SampingCode.eq(sampleCode)
         ).list();
     }
+
+    /**
+     * 查找数据库所有的SamplingDetailDao表
+     * @param samplingId 采样id
+     * @param sampleCode 采样编号
+     * @param samplingType  采样type
+     * @return List<SamplingDetail>
+     */
+    public static List<SamplingDetail> getSamplingDetailList(String samplingId, String sampleCode,
+                                                             int samplingType) {
+        return DBHelper.get().getSamplingDetailDao().queryBuilder().where(SamplingDetailDao.
+                        Properties.SamplingId.eq(samplingId),
+                SamplingDetailDao.Properties.SampingCode.eq(sampleCode),
+                SamplingDetailDao.Properties.SamplingType.eq(samplingType)
+        ).build().list();
+    }
+
+    /**
+     * 查找数据库所有的SamplingDetailDao表
+     * @param samplingId 采样id
+     * @param projectId 任务ID
+     * @param sampleCode code
+     * @param frequecyNo no
+     * @param samplingType type
+     * @return  List<SamplingDetail>
+     */
+    public static List<SamplingDetail> getSamplingDetailList(String samplingId, String projectId,
+                                                             String sampleCode,
+                                                             int frequecyNo, int samplingType) {
+        return   DBHelper.get().getSamplingDetailDao().
+                queryBuilder().where(SamplingDetailDao.Properties.SamplingId.eq(samplingId),
+                SamplingDetailDao.Properties.ProjectId.eq(projectId),
+                SamplingDetailDao.Properties.SampingCode.eq(sampleCode),
+                SamplingDetailDao.Properties.FrequecyNo.eq(frequecyNo),
+                SamplingDetailDao.Properties.SamplingType.eq(samplingType)).list();
+    }
+
 
     /**
      * 通过{@MsgDao.Properties.MsgStatus}查找数据库所有的MsgDao表
@@ -435,16 +509,7 @@ public class DbHelpUtils {
         return DBHelper.get().getTagsDao().queryBuilder().where(TagsDao.Properties.Id.eq(tagId)).unique();
     }
 
-    /**
-     * 通过{TagsDao.Properties.Id}查找数据库所有的TagsDao表
-     * TagsDao 要素分类表
-     *
-     * @param tagId 要素分类表
-     * @return Tags 要素
-     */
-    public static List<Tags> getTags(String... tagId) {
-        return DBHelper.get().getTagsDao().queryBuilder().where(TagsDao.Properties.Id.in(tagId)).list();
-    }
+
     /**
      * 通过{TagsDao.Properties.Id}查找数据库所有的TagsDao表
      * TagsDao 要素分类表
@@ -455,6 +520,11 @@ public class DbHelpUtils {
     public static List<Tags> getTags(List<String> stringList) {
         return DBHelper.get().getTagsDao().queryBuilder().where(TagsDao.Properties.Id.in(stringList)).list();
     }
+
+    public static List<Tags> getTagsForParentId(String parentId) {
+        return DBHelper.get().getTagsDao().queryBuilder().where(TagsDao.Properties.ParentId.eq(parentId)).list();
+    }
+
     /**
      * 获取所以的要素分类表
      *
@@ -510,14 +580,199 @@ public class DbHelpUtils {
                 queryBuilder().where(SamplingFileDao.Properties.Id.eq(id)).unique();
     }
 
+
     /**
      * 获取环境点位
      *
      * @param strings 点位集合
      * @return 环境质量点位信息
      */
-    public static List<EnvirPoint> getEnvirPointList(String... strings) {
-        return DBHelper.get().getEnvirPointDao().queryBuilder().where(EnvirPointDao.Properties.Id.in(strings)).list();
+    public static List<EnvirPoint> getEnvirPointList(List<String> strings) {
+        return DBHelper.get().getEnvirPointDao().queryBuilder().where(EnvirPointDao.
+                Properties.Id.in(strings)).list();
     }
 
+    /**
+     * 获取环境点位
+     *
+     * @param tagIds tagId
+     * @return 环境质量点位信息
+     */
+    public static List<EnvirPoint> getEnvirPointListForTagId(List<String> tagIds) {
+        return DBHelper.get().getEnvirPointDao().queryBuilder().where(EnvirPointDao.
+                Properties.TagId.in(tagIds)).list();
+    }
+
+    public static List<EnvirPoint> getEnvirPointListForTagId(String tagId) {
+        return DBHelper.get().getEnvirPointDao().queryBuilder().where(EnvirPointDao.
+                Properties.TagId.in(tagId)).list();
+    }
+
+    /**
+     * 获取环境点位
+     *
+     * @param string 点位ID
+     * @return 环境质量点位信息
+     */
+    public static EnvirPoint getEnvirPointList(String string) {
+        if (RxDataTool.isEmpty(string)) return new EnvirPoint();
+        return DBHelper.get().getEnvirPointDao().queryBuilder().where(EnvirPointDao.Properties.
+                Id.eq(string)).unique();
+    }
+
+    /**
+     * 获取环境点位
+     *
+     * @param tagId 点位ID
+     * @return 环境质量点位信息
+     */
+    public static List<EnvirPoint> getEnvirPointList(String tagId, List<String> pointIds) {
+        return DBHelper
+                .get()
+                .getEnvirPointDao()
+                .queryBuilder()
+                .where(EnvirPointDao.Properties.TagId.eq(tagId), EnvirPointDao.Properties.Id.in(pointIds))
+                //.where(EnvirPointDao.Properties.Id.in(pointIds))
+                .list();
+    }
+
+    /**
+     * 获取环境点位
+     *
+     * @param tagId 点位ID
+     * @return 环境质量点位信息
+     */
+    public static List<EnvirPoint> getEnvirPointListNotInIds(String tagId, List<String> ids) {
+        return DBHelper
+                .get()
+                .getEnvirPointDao()
+                .queryBuilder()
+                .where(EnvirPointDao.Properties.TagId.eq(tagId), EnvirPointDao.Properties.Id.notIn(ids))
+                //.where(EnvirPointDao.Properties.Id.in(pointIds))
+                .list();
+    }
+
+    /**
+     * 获取污染源点位
+     *
+     * @param mRcvId 监测单位ID
+     * @param ids    点位集合
+     * @return List<EnterRelatePoint>
+     */
+    public static List<EnterRelatePoint> getEnterRelatePointList(String mRcvId, List<String> ids) {
+        return DBHelper
+                .get()
+                .getEnterRelatePointDao()
+                .queryBuilder()
+                .where(EnterRelatePointDao.Properties.EnterPriseId.eq(mRcvId), EnterRelatePointDao.Properties.Id.in(ids))
+                //.where(EnterRelatePointDao.Properties.Id.in(pointIds))
+                .list();
+    }
+
+    /**
+     * 获取污染源点位
+     *
+     * @param mRcvId 监测单位ID
+     * @param ids    点位集合
+     * @return List<EnterRelatePoint>
+     */
+    public static List<EnterRelatePoint> getEnterRelatePointListNotIds(String mRcvId, List<String> ids) {
+        return DBHelper
+                .get()
+                .getEnterRelatePointDao()
+                .queryBuilder()
+                .where(EnterRelatePointDao.Properties.EnterPriseId.eq(mRcvId), EnterRelatePointDao.Properties.Id.notIn(ids))
+                //.where(EnterRelatePointDao.Properties.Id.in(pointIds))
+                .list();
+    }
+
+    /**
+     * 获取污染源点位
+     *
+     * @param mRcvId 监测单位ID
+     * @return List<EnterRelatePoint>
+     */
+    public static List<EnterRelatePoint> getEnterRelatePointList(String mRcvId) {
+        return DBHelper
+                .get()
+                .getEnterRelatePointDao()
+                .queryBuilder()
+                .where(EnterRelatePointDao.Properties.EnterPriseId.eq(mRcvId))
+                //.where(EnterRelatePointDao.Properties.Id.in(pointIds))
+                .list();
+    }
+
+    /**
+     * 根据监测项目获取监测方法
+     *
+     * @param monItemId 监测项目id
+     * @return 监测方法list
+     */
+    public static List<MonItemMethodRelation> getMonItemMethodRelationList(String monItemId) {
+        return DBHelper.get().getMonItemMethodRelationDao().queryBuilder().
+                where(MonItemMethodRelationDao.Properties.MonItemId.eq(monItemId)).list();
+    }
+
+    /**
+     * 根据方法id获取方法详情
+     *
+     * @param methodIdList 方法id集合
+     * @return 方法详情集合
+     */
+    public static List<Methods> getMethodList(List<String> methodIdList) {
+        if (RxDataTool.isEmpty(methodIdList)) return new ArrayList<>();
+        return DBHelper.get().getMethodsDao().
+                queryBuilder().where(MethodsDao.Properties.Id.
+                in(methodIdList)).list();
+    }
+
+    /**
+     * 获取天气
+     *
+     * @return 天气
+     */
+    public static List<Weather> getWeatherList() {
+        return DBHelper.get().getWeatherDao().queryBuilder().list();
+    }
+
+    /**
+     * 获取采样规范
+     *
+     * @param tagId 要素Id
+     * @return 采样规范列表
+     */
+    public static List<SamplingStantd> getSamplingStantdList(String tagId) {
+        return DBHelper.get().getSamplingStantdDao().
+                queryBuilder().where(SamplingStantdDao.Properties.TagId.eq(tagId)).list();
+    }
+
+    /**
+     * 根据采样id和监测项目id 查找分瓶
+     *
+     * @param samplingId
+     * @param itemId
+     * @return
+     */
+    public static List<SamplingFormStand> getSamplingStanTdList(String samplingId, String itemId) {
+        List<SamplingFormStand>
+                stanTdList = DBHelper.get().getSamplingFormStandDao().queryBuilder()
+                .where(SamplingFormStandDao.Properties.SamplingId.eq(samplingId),
+                        SamplingFormStandDao.Properties.MonitemIds.like(itemId + "%")).list();
+        if (stanTdList == null) return new ArrayList<>();
+        else return stanTdList;
+    }
+    /**
+     * 根据i采样d获取分瓶集合
+     *
+     * @param id
+     * @return
+     */
+    public static List<SamplingFormStand> getSamplingFormStandListForSampId(String id) {
+        if (RxDataTool.isEmpty(id)) return new ArrayList<>();
+        List<SamplingFormStand> list = DBHelper.get().getSamplingFormStandDao().queryBuilder().
+                where(SamplingFormStandDao.
+                        Properties.SamplingId.eq(id)).list();
+        if (list == null) return new ArrayList<>();
+        else return list;
+    }
 }

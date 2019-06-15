@@ -11,6 +11,7 @@ import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -162,8 +163,8 @@ public class SamplingUtil {
         sampling.setProjectId(project.getId());
         sampling.setProjectName(project.getName());
         sampling.setProjectNo(project.getProjectNo());
-        sampling.setTagId(formSelect.getTagId());
-        sampling.setTagName(TagsUtils.getTagsName(RxDataTool.strToList(formSelect.getTagId())));//这里可能有很多tagName
+//        sampling.setTagId(formSelect.getTagId());
+//        sampling.setTagName(TagsUtils.getTagsName(RxDataTool.strToList(formSelect.getTagId())));//这里可能有很多tagName
         sampling.setMontype(project.getTypeCode());
         sampling.setFormType(formSelect.getTagParentId());
         sampling.setFormTypeName(formSelect.getFormName());
@@ -202,7 +203,7 @@ public class SamplingUtil {
      * @param formSelectId
      * @return
      */
-    public static Sampling createInstrumentalSampling(String projectId, String formSelectId) {
+    public static Sampling createNewSampling(String projectId, String formSelectId) {
         Sampling sampling = createSample(projectId, formSelectId);
         HashMap<String, String> privateData = new HashMap<>();
         privateData.put("CaleValue", "");
@@ -240,7 +241,7 @@ public class SamplingUtil {
      */
     public static String createSamplingNo() {
         StringBuilder samplingNo = new StringBuilder();
-        String dateStr = RxDateTool.getCurTimeString().replace("-", "").substring(2);
+        String dateStr = RxDateTool.getDateYYYY_MM_DD().replace("-", "").substring(2);
         samplingNo.append(dateStr).append("-");
         samplingNo.append(UserInfoHelper.get().getUser().getIntId()).append("-");
         List<Sampling> samplings = DBHelper.get().getSamplingDao().queryBuilder().
@@ -290,86 +291,110 @@ public class SamplingUtil {
         return samplingNo.toString();
     }
 
+
     /**
-     * 样品编码规则 样品性质年月日——采样单流水号账号——采样号
-     * 样品性质：
-     * 1.水质
-     * 地下水、海水、废水、地表水     ===》  DXS/HS/FS/DBS
-     * 2.空气
-     * 无组织废气、环境空气、室内空气  ===》  WF/HK/SK
-     * 3.废气
-     * 有组织废气                  ===》  YF
-     * 4.降水
-     * 降水                       ===》  JS
-     * <p>
-     * <p>
-     * 注这里只返回：年月日——采样单流水号账号
-     *
-     * @return 年月日——采样单流水号账号
+     * * 样品编码规则 样品性质年月日——采样单流水号账号——采样号
+     * * 样品性质：
+     * * 1.水质
+     * * 地下水、海水、废水、地表水     ===》  DXS/HS/FS/DBS
+     * * 2.空气
+     * * 无组织废气、环境空气、室内空气  ===》  WF/HK/SK
+     * * 3.废气
+     * * 有组织废气                  ===》  YF
+     * * 4.降水
+     * * 降水                       ===》  JS
+     * * <p>
+     * * <p>
+     * * 注这里只返回：年月日——采样单流水号账号
+     * *
+     * * @return 样品编码
      */
-    public static String createSamplingFrequecyNo() {
-        StringBuilder samplingNo = new StringBuilder();
-        String dateStr = RxDateTool.getCurTimeString().replace("-", "").substring(2);
-        samplingNo.append(dateStr).append("-");
-//        List<Sampling> samplings = DBHelper.get().getSamplingDao().queryBuilder().where(SamplingDao.Properties.SamplingNo.like(samplingNo.toString() + "%"), SamplingDao.Properties.ProjectId.eq(projectId)).orderAsc(SamplingDao.Properties.SamplingNo).list();
-        List<Sampling> samplings = DBHelper.get().getSamplingDao().queryBuilder().
-                where(SamplingDao.Properties.SamplingNo.like(samplingNo.toString() + "%")).
-                orderAsc(SamplingDao.Properties.SamplingNo).list();
-        if (RxDataTool.isEmpty(samplings)) {
-            samplingNo.append(StringUtil.autoGenericCode(1, 2));
+    public static String createSamplingCode(Sampling mSampling) {
+        int snFrequency = 1;
+        if (!RxDataTool.isEmpty(mSampling.getSamplingDetailResults())) {
+            snFrequency = mSampling.getSamplingDetailResults().size() + 1;
         } else {
-            String lastSamlingNo = samplings.get(samplings.size() - 1).getSamplingNo();
-            if (!RxDataTool.isEmpty(lastSamlingNo)) {
-                int serialNumber = Integer.parseInt(lastSamlingNo.substring(lastSamlingNo.length() - 2)) + 1;
-                samplingNo.append(StringUtil.autoGenericCode(serialNumber, 2));
-            } else {
-                samplingNo.append(StringUtil.autoGenericCode(1, 2));
+            List<SamplingDetail> samplingDetails = DbHelpUtils.getSamplingDetailList(mSampling.getId());
+            if (!RxDataTool.isEmpty(samplingDetails)) {
+                snFrequency = samplingDetails.size() + 1;
             }
         }
-        samplingNo.append(UserInfoHelper.get().getUser().getIntId());
-        return samplingNo.toString();
+        String mSamplingNo = mSampling.getSamplingNo();//采样单编号
+        String dateStr = RxDateTool.getDataNewFormat(RxDateTool.DATE_FORMAT,
+                mSampling.getSamplingTimeBegin()).replace("-", "").substring(2);//年月日
+        String waterNo = mSamplingNo.substring(mSamplingNo.lastIndexOf("-") + 1, mSamplingNo.length());//采样单流水号
+        String userId = UserInfoHelper.get().getUser().getIntId() + "-";//用户系统编号
+        String samplingNo = getSamplingCodeName(mSampling.getTagName()) + dateStr + "-" + waterNo + userId + StringUtil.autoGenericCode(snFrequency, 2);//采样号
+        return samplingNo;
     }
 
     /**
-     * 样品编码规则 样品性质年月日——采样单流水号账号——采样号
-     * 样品性质：
-     * 1.水质
-     * 地下水、海水、废水、地表水     ===》  DXS/HS/FS/DBS
-     * 2.空气
-     * 无组织废气、环境空气、室内空气  ===》  WF/HK/SK
-     * 3.废气
-     * 有组织废气                  ===》  YF
-     * 4.降水
-     * 降水                       ===》  JS
-     * <p>
-     * <p>
-     * 注这里只返回：年月日——采样单流水号账号
+     * 根据样品性质名称获取对应的编码名称
      *
-     * @return 年月日——采样单流水号账号
+     * @return
      */
-    public static String createSamplingFrequecyNo(String data) {
-        StringBuilder samplingNo = new StringBuilder();
-        String dateStr = data.replace("-", "").substring(2);
-        samplingNo.append(dateStr);
-//        List<Sampling> samplings = DBHelper.get().getSamplingDao().queryBuilder().where(SamplingDao.Properties.SamplingNo.like(samplingNo.toString() + "%"), SamplingDao.Properties.ProjectId.eq(projectId)).orderAsc(SamplingDao.Properties.SamplingNo).list();
-        List<Sampling> samplings = DBHelper.get().getSamplingDao().queryBuilder().
-                where(SamplingDao.Properties.SamplingNo.like(samplingNo.toString() + "%")).
-                orderAsc(SamplingDao.Properties.SamplingNo).list();
-        if (RxDataTool.isEmpty(samplings)) {
-            samplingNo.append("-").append(StringUtil.autoGenericCode(1, 2));
-        } else {
-            String lastSamlingNo = samplings.get(samplings.size() - 1).getSamplingNo();
-            if (!RxDataTool.isEmpty(lastSamlingNo)) {
-                int serialNumber = Integer.parseInt(lastSamlingNo.substring(lastSamlingNo.length() - 2));
-                samplingNo.append("-").append(StringUtil.autoGenericCode(serialNumber, 2));
-            } else {
-                samplingNo.append("-").append(StringUtil.autoGenericCode(1, 2));
+    public static String getSamplingCodeName(String tagName) {
+        if (RxDataTool.isEmpty(tagName)) return "";
+        else switch (tagName) {
+            case "地下水":
+                return "DXS";
+            case "海水":
+                return "HS";
+            case "废水":
+                return "FS";
+            case "地表水":
+                return "DBS";
+            case "无组织废气":
+                return "WF";
+            case "环境空气":
+                return "HK";
+            case "室内空气":
+                return "SK";
+            case "有组织废气":
+                return "YF";
+            case "降水":
+                return "JS";
+            default:
+                return "";
+        }
+    }
+    /**
+     * 创建频次(普通样)
+     *
+     * @param sampling
+     * @return
+     */
+    public static int createFrequency(Sampling sampling) {
+        int snFrequency = 1;
+        List<SamplingContent> samplingDetailResults = sampling.getSamplingContentResults();
+        if (samplingDetailResults != null && samplingDetailResults.size() > 0) {
+            List<Integer> tempList = new ArrayList<>();
+            for (SamplingContent detail : samplingDetailResults) {
+                if (detail.getSamplingType() == 0) {
+                    tempList.add(detail.getFrequecyNo());
+                }
+            }
+            if (!RxDataTool.isEmpty(tempList)) {
+                snFrequency = Collections.max(tempList) + 1;
             }
         }
-        samplingNo.append(UserInfoHelper.get().getUser().getIntId());
-        return samplingNo.toString();
+        return snFrequency;
     }
-
+    /**
+     * 创建orderIndex
+     *
+     * @param mSampling
+     * @return
+     */
+    public static int createOrderIndex(Sampling mSampling) {
+        int snIndex = 1;
+        List<SamplingContent> samplingDetailResults = mSampling.getSamplingContentResults();
+        if (!RxDataTool.isEmpty(samplingDetailResults)) {
+            SamplingContent lastContent = samplingDetailResults.get(samplingDetailResults.size() - 1);
+            snIndex = lastContent.getOrderIndex() + 1;//OrderOndex:表示前面的序号
+        }
+        return snIndex;
+    }
     /**
      * 判断当前表单能否编辑
      * 通过采样单状态
@@ -574,6 +599,9 @@ public class SamplingUtil {
         return stringBuilderId.toString();
     }
 
+
+
+
     /**
      * 批量保存采样单
      *
@@ -630,7 +658,7 @@ public class SamplingUtil {
 
         //删除采样单对应的SamplingContent
         List<SamplingContent> dbContentList = DbHelpUtils.
-                getSamplingContent(sampling.getId());
+                getSamplingContentList(sampling.getId());
         if (!RxDataTool.isEmpty(dbContentList)) {
             DBHelper.get().getSamplingContentDao().deleteInTx(dbContentList);
         }
@@ -708,6 +736,7 @@ public class SamplingUtil {
         new DownloadSamplingFileAsyncTask().execute(samplingFile);
     }
 
+
     static class DownloadSamplingFileAsyncTask extends AsyncTask<SamplingFile, Void, Void> {
         @Override
         protected Void doInBackground(SamplingFile... samplingFiles) {
@@ -758,9 +787,9 @@ public class SamplingUtil {
                         privateData.setImageSYT(filePath);
                         sampling.setPrivateData(new Gson().toJson(privateData));
                         if (RxDataTool.isEmpty(DbHelpUtils.getDbSampling(sampling.getId()))) {
-                            DBHelper.get().getSamplingDao().update(sampling);
+                            DBHelper.get().getSamplingDao().insertOrReplace(sampling);
                         } else {
-                            DBHelper.get().getSamplingDao().insert(sampling);
+                            DBHelper.get().getSamplingDao().update(sampling);
                         }
                     }
                     break;

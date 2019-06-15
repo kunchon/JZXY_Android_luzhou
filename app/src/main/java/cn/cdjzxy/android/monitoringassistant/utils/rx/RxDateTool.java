@@ -22,7 +22,8 @@ public class RxDateTool {
 
     //Date格式 常用  年月日
     public static String DATE_FORMAT = "yyyy-MM-dd";
-
+    //Date格式 常用  年月
+    public static String DATE_YYYY_MMM = "yyyy-MM";
     //Date格式 带毫秒
     public static final String DATE_FORMAT_DETACH_SSS = "yyyy-MM-dd HH:mm:ss SSS";
 
@@ -184,6 +185,7 @@ public class RxDateTool {
     public static Date string2Date(String time, SimpleDateFormat format) {
         return new Date(string2Milliseconds(time, format));
     }
+
 
     /**
      * 将Date类型转为时间字符串
@@ -451,26 +453,25 @@ public class RxDateTool {
         return content;
     }
 
+
     /**
-     * 将制定oldFormat格式时间date转化为想要的时间格式nowFormat
+     * 将制定DATE_FORMAT_DETACH格式时间date转化为想要的时间格式nowFormat
      * 只能将长时间转化为短时间
      *
-     * @param oldFormat 格式
      * @param date      日期
-     * @param nowFormat 期望的时间
+     * @param nowFormat 期望的时间格式
      * @return
      */
-    public static String simpleDateFormat(String oldFormat, String date, String nowFormat) {
+    public static String simpleDateFormat(String date, String nowFormat) {
         if (RxDataTool.isEmpty(date)) return "";
         try {
-            Date simpleDateFormat = new SimpleDateFormat(oldFormat).parse(date);
-            return getDate(nowFormat,simpleDateFormat);
+            Date simpleDateFormat = new SimpleDateFormat(DATE_FORMAT_DETACH).parse(date);
+            return getDate(nowFormat, simpleDateFormat);
         } catch (ParseException e) {
             e.printStackTrace();
             return date;
         }
     }
-
     //--------------------------------------------字符串转换成时间戳-----------------------------------
 
     /**
@@ -527,16 +528,40 @@ public class RxDateTool {
     }
 
     /**
-     * 时间戳  转换成 指定格式的日期
-     * 如果format为空，则默认格式为
+     * 将指定为：时间为年月日时分秒的字符串 转化为想要的字符串
      *
-     * @param times  时间戳
-     * @param format 日期格式 yyyy-MM-dd HH:mm:ss
+     * @param date   时间
+     * @param format 想要的格式
      * @return
      */
-    @SuppressLint("SimpleDateFormat")
-    public static String getDate(String times, String format) {
-        return simpleDateFormat(format, new Date(stringToInt(times) * 1000L));
+    public static String getDataNewFormat(String format, String date) {
+        if (RxDataTool.isEmpty(date)) return "";
+        try {
+            Date simpleDateFormat = new SimpleDateFormat(DATE_FORMAT_DETACH).parse(date);
+            return getDate(format, simpleDateFormat);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return date;
+        }
+    }
+
+    /**
+     * 将指定格式字符串的时间转化为自己想要的字符串时间
+     *
+     * @param date      时间字符串
+     * @param oldFormat 指定的格式
+     * @param newFormat 想要的格式
+     * @return 返回想要的格式时间
+     */
+    public static String getDate(String date, String oldFormat, String newFormat) {
+        if (RxDataTool.isEmpty(date)) return "";
+        try {
+            Date simpleDateFormat = new SimpleDateFormat(oldFormat).parse(date);
+            return getDate(newFormat, simpleDateFormat);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return date;
+        }
     }
 
     /**
@@ -548,6 +573,7 @@ public class RxDateTool {
     public static String getDate(String format) {
         return getDate(format, new Date());
     }
+
 
     /**
      * 获取当前年月日
@@ -562,6 +588,24 @@ public class RxDateTool {
      * 获取当前年月日
      *
      * @return 当前年月日
+     */
+    public static String getDateYYYY_MM_DD() {
+        return getDate(DATE_FORMAT);
+    }
+
+    /**
+     * 获取当前年月日
+     *
+     * @return 当前年月日
+     */
+    public static String getDateYYYY_MM_DD(Date date) {
+        return getDate(DATE_FORMAT, date);
+    }
+
+    /**
+     * 获取当前时间
+     *
+     * @return 当前年月日时分秒
      */
     public static String getDate(Date date) {
         return new SimpleDateFormat(DATE_FORMAT_DETACH).format(date);

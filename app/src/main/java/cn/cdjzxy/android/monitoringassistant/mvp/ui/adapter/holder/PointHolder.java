@@ -91,12 +91,13 @@ public class PointHolder extends BaseHolder<ProjectDetial> {
      * 初始化Tab数据
      */
     private void initPointItemData(String pointId) {
+        if (RxDataTool.isEmpty(pointId)) return;
         List<EnvirPoint> envirPoints = new ArrayList<>();
 
         if (pointId.contains(",")) {
-            envirPoints = DbHelpUtils.getEnvirPointList(pointId.split(","));
+            envirPoints = DbHelpUtils.getEnvirPointList(RxDataTool.strToList(pointId));
         } else {
-            envirPoints = DbHelpUtils.getEnvirPointList(pointId);
+            envirPoints.add(DbHelpUtils.getEnvirPointList(pointId));
         }
 
         if (!RxDataTool.isEmpty(envirPoints)) {
@@ -106,7 +107,7 @@ public class PointHolder extends BaseHolder<ProjectDetial> {
                     return false;
                 }
             });
-            mPointItemAdapter = new PointItemAdapter(envirPoints,mContext);
+            mPointItemAdapter = new PointItemAdapter(envirPoints, mContext);
             mRecyclerViewItem.setAdapter(mPointItemAdapter);
             mPointItemAdapter.setOnItemClickListener(new DefaultAdapter.OnRecyclerViewItemClickListener() {
                 @Override

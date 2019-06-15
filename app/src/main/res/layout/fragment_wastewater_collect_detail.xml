@@ -38,7 +38,6 @@
     <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
         android:id="@+id/my_layout_sample_code"
         style="@style/MyDrawableLinearLayoutItemStyle"
-        app:drawableRight="@mipmap/ic_has_next"
         app:isShowRightTextView="true"
         app:leftText="样品编码"
         app:rightEditTextHint="系统带出"
@@ -60,7 +59,6 @@
     <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
         android:id="@+id/my_layout_sample_frequency"
         style="@style/MyDrawableLinearLayoutItemStyle"
-        app:drawableRight="@mipmap/ic_has_next"
         app:isShowRightTextView="true"
         app:leftText="频次"
         app:rightEditTextHint="请输入"
@@ -71,7 +69,6 @@
     <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
         android:id="@+id/my_layout_sample_quality"
         style="@style/MyDrawableLinearLayoutItemStyle"
-        app:drawableRight="@mipmap/ic_has_next"
         app:isShowRightTextView="true"
         app:leftText="质控"
         app:rightEditTextHint="请输入"

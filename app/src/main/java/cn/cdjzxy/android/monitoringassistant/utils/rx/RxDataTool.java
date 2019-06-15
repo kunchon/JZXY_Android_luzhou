@@ -23,6 +23,7 @@ import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -64,7 +65,7 @@ import static cn.cdjzxy.android.monitoringassistant.utils.rx.RxConstTool.MB;
  */
 
 public class RxDataTool {
-
+    public static final int DATA_PAGE_SIZE = 800;
 
     private static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'A', 'B', 'C', 'D', 'E', 'F'};
@@ -1107,6 +1108,33 @@ public class RxDataTool {
             stringList.add(s);
         }
         return stringList;
+    }
+
+    /**
+     * 过滤重复项 如果str1中有包含str2的内容，则把str1重复的内容去掉，
+     *
+     * @param str1 过滤的本体
+     * @param str2 过滤材料源
+     * @return 由","区分的结果 返回str1中剩下的部分
+     */
+    public static String getDifference(String str1, String str2) {
+        if (str1 == null || str1.equals("")) {
+            return str1;
+        }
+        if (str2 == null || str2.equals(""))
+            return str1;
+        List<String> strList = strToList(str1);
+        List<String> itemList = strToList(str2);
+        StringBuilder res = new StringBuilder();
+        for (String item : strList) {
+            if (!itemList.contains(item)) {
+                res.append(item + ",");
+            }
+        }
+        if (res.lastIndexOf(",") > 0) {
+            res.deleteCharAt(res.lastIndexOf(","));
+        }
+        return res.toString();
     }
 
     /**

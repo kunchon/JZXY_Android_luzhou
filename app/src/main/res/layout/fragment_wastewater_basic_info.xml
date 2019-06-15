@@ -140,7 +140,7 @@
 
         </LinearLayout>
 
-        <include layout="@layout/view_add_photo" />
+
 
 
     </LinearLayout>

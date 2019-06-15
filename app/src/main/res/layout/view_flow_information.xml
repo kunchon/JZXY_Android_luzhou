@@ -65,8 +65,7 @@
             app:drawableRight="@mipmap/ic_has_next"
             app:isShowRightTextView="true"
             app:leftText="收样时间"
-            app:rightEditTextHint="系统带回"
-            app:rightTextHint="请选择" />
+            app:rightTextHint="系统带回" />
 
     </LinearLayout>
 

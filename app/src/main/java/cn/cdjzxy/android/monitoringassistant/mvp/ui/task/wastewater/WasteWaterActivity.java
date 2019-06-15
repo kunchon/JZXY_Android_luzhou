@@ -8,14 +8,18 @@ import android.widget.LinearLayout;
 
 import com.aries.ui.view.title.TitleBarView;
 
+import org.simple.eventbus.Subscriber;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import cn.cdjzxy.android.monitoringassistant.R;
+import cn.cdjzxy.android.monitoringassistant.app.EventBusTags;
 import cn.cdjzxy.android.monitoringassistant.base.base.activity.MyBaseViewPagerActivity;
 import cn.cdjzxy.android.monitoringassistant.base.mvp.Message;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.other.Tab;
+import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.project.Project;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.Sampling;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.SamplingDetail;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.fragment.SampleBaseFragment;
@@ -31,24 +35,15 @@ import cn.cdjzxy.android.monitoringassistant.widget.NoScrollViewPager;
 
 public class WasteWaterActivity extends MyBaseViewPagerActivity {
 
-    @BindView(R.id.tabview)
-    CustomTab tabview;
-    @BindView(R.id.layout)
-    LinearLayout layout;
-    @BindView(R.id.viewPager)
-    NoScrollViewPager viewPager;
-
-
-    private String projectId;
-    private String formSelectId;
     private String samplingId;
     private Sampling mSampling;
+    public Project mProject;
 
-    protected static final int FRAGMENT_ITEM_INT_BASIC = 0;
-    protected static final int FRAGMENT_ITEM_INT_COLLECTION = FRAGMENT_ITEM_INT_BASIC + 1;
-    protected static final int FRAGMENT_ITEM_INT_SQlLIT = FRAGMENT_ITEM_INT_COLLECTION + 1;
-    protected static final int FRAGMENT_ITEM_INT_COLLECTION_DETAIL = FRAGMENT_ITEM_INT_SQlLIT + 1;
-    protected static final int FRAGMENT_ITEM_INT_SQlLIT_DETAIL = FRAGMENT_ITEM_INT_COLLECTION_DETAIL + 1;
+    public static final int FRAGMENT_ITEM_INT_BASIC = 0;
+    public static final int FRAGMENT_ITEM_INT_COLLECTION = FRAGMENT_ITEM_INT_BASIC + 1;
+    public static final int FRAGMENT_ITEM_INT_SQlLIT = FRAGMENT_ITEM_INT_COLLECTION + 1;
+    public static final int FRAGMENT_ITEM_INT_COLLECTION_DETAIL = FRAGMENT_ITEM_INT_SQlLIT + 1;
+    public static final int FRAGMENT_ITEM_INT_SQlLIT_DETAIL = FRAGMENT_ITEM_INT_COLLECTION_DETAIL + 1;
 
 
     @Override
@@ -67,6 +62,10 @@ public class WasteWaterActivity extends MyBaseViewPagerActivity {
         CollectionDetailFragment collectionDetailFragment = new CollectionDetailFragment();
         BottleSplitDetailFragment bottleSplitDetailFragment = new BottleSplitDetailFragment();
         basic.setData(mSampling);
+        collectionFragment.setData(mSampling);
+        splitFragment.setData(mSampling);
+        collectionDetailFragment.setData(mSampling);
+        bottleSplitDetailFragment.setData(mSampling);
         list.add(basic);
         list.add(collectionFragment);
         list.add(splitFragment);
@@ -83,7 +82,7 @@ public class WasteWaterActivity extends MyBaseViewPagerActivity {
     @Override
     protected List<Tab> initTabData() {
         List<Tab> tabList = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             Tab tab = new Tab();
             if (i == FRAGMENT_ITEM_INT_BASIC) {
                 tab.setTabName("基础信息");
@@ -92,7 +91,7 @@ public class WasteWaterActivity extends MyBaseViewPagerActivity {
             } else if (i == FRAGMENT_ITEM_INT_COLLECTION) {
                 tab.setTabName("样品采集");
                 tab.setSelected(false);
-                tab.setResId(R.mipmap.icon_basic);
+                tab.setResId(R.mipmap.icon_samp_coll);
             } else if (i == FRAGMENT_ITEM_INT_SQlLIT) {
                 tab.setTabName("分瓶信息");
                 tab.setSelected(false);
@@ -110,14 +109,14 @@ public class WasteWaterActivity extends MyBaseViewPagerActivity {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        projectId = getIntent().getStringExtra(SamplingUtil.INTENT_PROJECT_ID);
-        formSelectId = getIntent().getStringExtra(SamplingUtil.INTENT_FORM_SELECT_ID);
+        String projectId = getIntent().getStringExtra(SamplingUtil.INTENT_PROJECT_ID);
+        String formSelectId = getIntent().getStringExtra(SamplingUtil.INTENT_FORM_SELECT_ID);
         samplingId = getIntent().getStringExtra(SamplingUtil.INTENT_SAMPLE_ID);
         boolean isNewCreate = getIntent().getBooleanExtra(SamplingUtil.INTENT_IS_NEW_CREATE, false);
-
+        mProject = DbHelpUtils.getDbProject(projectId);
         if (isNewCreate) {
             //是否是新建
-            mSampling = SamplingUtil.createInstrumentalSampling(projectId, formSelectId);
+            mSampling = SamplingUtil.createNewSampling(projectId, formSelectId);
         } else {
             //从数据库加载
             mSampling = DbHelpUtils.getDbSampling(samplingId);
@@ -141,5 +140,10 @@ public class WasteWaterActivity extends MyBaseViewPagerActivity {
     @Override
     public void handleMessage(@NonNull Message message) {
 
+    }
+
+    @Subscriber(tag = EventBusTags.TAG_WASTE_WATER_COLLECTION)
+    private void updateCollectFragment(int position) {
+        openFragment(position, true);
     }
 }

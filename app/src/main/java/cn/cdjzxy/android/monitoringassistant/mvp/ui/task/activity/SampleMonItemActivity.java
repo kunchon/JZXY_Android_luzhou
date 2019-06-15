@@ -1,4 +1,4 @@
-package cn.cdjzxy.android.monitoringassistant.mvp.ui.task;
+package cn.cdjzxy.android.monitoringassistant.mvp.ui.task.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -37,6 +37,7 @@ import cn.cdjzxy.android.monitoringassistant.utils.ArtUtils;
 import cn.cdjzxy.android.monitoringassistant.utils.DbHelpUtils;
 import cn.cdjzxy.android.monitoringassistant.utils.SamplingUtil;
 import cn.cdjzxy.android.monitoringassistant.utils.rx.RxDataTool;
+import cn.cdjzxy.android.monitoringassistant.widget.CustomTab;
 
 /**
  * 获取某种采样单的检测项目
@@ -44,9 +45,10 @@ import cn.cdjzxy.android.monitoringassistant.utils.rx.RxDataTool;
  */
 public class SampleMonItemActivity extends MyTitleActivity {
 
-
-    @BindView(R.id.recyclerView_monite)
-    RecyclerView recyclerViewMonite;
+    @BindView(R.id.view_pager)
+    RecyclerView recyclerView;
+    @BindView(R.id.tab_view)
+    CustomTab tabView;
 
     private String projectId;
     private WasteWaterMonIteMAdapter mWasteWaterMonItemAdapter;
@@ -62,11 +64,12 @@ public class SampleMonItemActivity extends MyTitleActivity {
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {
-        return R.layout.activity_waste_water_monite;
+        return R.layout.view_tab_recyler_view;
     }
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        tabView.setVisibility(View.GONE);
         projectId = getIntent().getStringExtra(SamplingUtil.INTENT_PROJECT_ID);
         String path = getIntent().getStringExtra(INTENT_PATH);
         //获取水和废水采样单
@@ -194,7 +197,7 @@ public class SampleMonItemActivity extends MyTitleActivity {
      * 初始化Tab数据
      */
     private void initSamplingDetailsData() {
-        ArtUtils.configRecyclerView(recyclerViewMonite, new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) {
+        ArtUtils.configRecyclerView(recyclerView, new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) {
             @Override
             public boolean canScrollVertically() {//设置RecyclerView不可滑动
                 return true;
@@ -236,7 +239,7 @@ public class SampleMonItemActivity extends MyTitleActivity {
                 finish();
             }
         });
-        recyclerViewMonite.setAdapter(mWasteWaterMonItemAdapter);
+        recyclerView.setAdapter(mWasteWaterMonItemAdapter);
     }
 
     @Override

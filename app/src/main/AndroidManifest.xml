@@ -37,19 +37,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".mvp.ui.task.noise.activity.NoisePointPicActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".mvp.ui.task.noise.activity.NoiseFactoryActivity" >
-        </activity>
-        <activity android:name=".mvp.ui.task.device.DeviceActivity" />
-        <activity android:name=".mvp.ui.task.precipitation.PrecipitationActivity" >
-        </activity>
-        <activity android:name=".mvp.ui.task.wastewater.WasteWaterActivity" />
 
         <meta-data
             android:name="cn.cdjzxy.android.monitoringassistant.app.GlobalConfiguration"
@@ -67,11 +55,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@style/AppTransparentTheme">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".mvp.ui.MainActivity"
@@ -96,10 +84,10 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".mvp.ui.webview.WebActivity" />
         <activity
-            android:name=".mvp.ui.task.TaskActivity"
+            android:name=".mvp.ui.task.activity.TaskActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".mvp.ui.task.TaskDetailActivity"
+            android:name=".mvp.ui.task.activity.TaskDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".mvp.ui.task.point.PointActivity"
@@ -111,14 +99,65 @@
             android:name=".mvp.ui.task.point.ProgramPointSelectActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".mvp.ui.task.point.MonItemActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:name=".mvp.ui.task.activity.MonItemActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".mvp.ui.task.instrumental.InstrumentalActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".mvp.ui.task.SampleMonItemActivity" />
-        <activity android:name=".mvp.ui.task.UserActivity"
-            android:configChanges="orientation|keyboardHidden"/>
+        <activity
+            android:name=".mvp.ui.task.activity.SampleMonItemActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".mvp.ui.task.activity.UserActivity"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name=".mvp.ui.task.activity.MonItemMethodActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".mvp.ui.task.noise.activity.NoisePointPicActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".mvp.ui.task.noise.activity.NoiseFactoryActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".mvp.ui.task.device.DeviceActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".mvp.ui.task.precipitation.PrecipitationActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".mvp.ui.task.wastewater.WasteWaterActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".mvp.ui.task.point.EnterRelatePointSelectActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".mvp.ui.task.point.PointSelectActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".mvp.ui.task.activity.MethodActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".mvp.ui.task.activity.TypeActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".mvp.ui.task.activity.WeatherActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".mvp.ui.task.activity.BottleMonItemActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".mvp.ui.task.activity.PlaceActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

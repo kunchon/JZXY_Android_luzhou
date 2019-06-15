@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -18,12 +21,15 @@ import cn.cdjzxy.android.monitoringassistant.R;
 import cn.cdjzxy.android.monitoringassistant.base.mvp.Message;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.Sampling;
 import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.sampling.SamplingDetail;
-import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.SampleMonItemActivity;
-import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.UserActivity;
+import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.activity.MonItemMethodActivity;
+import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.activity.SampleMonItemActivity;
+import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.activity.UserActivity;
+import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.device.DeviceActivity;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.fragment.SampleBaseFragment;
 import cn.cdjzxy.android.monitoringassistant.user.db.DBHelper;
 import cn.cdjzxy.android.monitoringassistant.utils.DbHelpUtils;
 import cn.cdjzxy.android.monitoringassistant.utils.SamplingUtil;
+import cn.cdjzxy.android.monitoringassistant.utils.TimePickerViewUtils;
 import cn.cdjzxy.android.monitoringassistant.utils.onactivityresult.AvoidOnResult;
 import cn.cdjzxy.android.monitoringassistant.utils.rx.RxDataTool;
 import cn.cdjzxy.android.monitoringassistant.utils.rx.RxDateTool;
@@ -78,10 +84,10 @@ public class InstrumentalBasic extends SampleBaseFragment {
 //            tvSamplingProperty.setText(InstrumentalActivity.mSampling.getTagName());
             tvSamplingProperty.setRightTextStr(mSampling.getFormTypeName());
             tvTestUser.setRightTextStr(mSampling.getSamplingUserName());
-            String startDate = RxDateTool.simpleDateFormat(RxDateTool.DATE_FORMAT_DETACH,
-                    mSampling.getSamplingTimeBegin(), RxDateTool.DATE_FORMAT);
+            String startDate = RxDateTool.simpleDateFormat(mSampling.getSamplingTimeBegin(),
+                    RxDateTool.DATE_FORMAT);
             tvTestStartDate.setRightTextStr(startDate);
-            String endDate = RxDateTool.simpleDateFormat(RxDateTool.DATE_FORMAT_DETACH,
+            String endDate = RxDateTool.simpleDateFormat(
                     mSampling.getSamplingTimeEnd(), RxDateTool.DATE_FORMAT);
             tvTestEndDate.setRightTextStr(endDate);
             tvTestMethod.setRightTextStr(mSampling.getMethodName());
@@ -98,13 +104,13 @@ public class InstrumentalBasic extends SampleBaseFragment {
         }
     }
 
-    @Override
-    public void setData(@Nullable Object data) {
-        if (data != null && data instanceof Sampling) {
-            this.mSampling = (Sampling) data;
-            // initData(null);
-        }
-    }
+//    @Override
+//    public void setData(@Nullable Object data) {
+//        if (data != null && data instanceof Sampling) {
+//            this.mSampling = (Sampling) data;
+//            // initData(null);
+//        }
+//    }
 
     @Override
     public void handleMessage(@NonNull Message message) {
@@ -122,15 +128,115 @@ public class InstrumentalBasic extends SampleBaseFragment {
                 selectUser();
                 break;
             case R.id.my_layout_start_date:
+                selectDate(true);
                 break;
             case R.id.my_layout_end_date:
+                selectDate(false);
                 break;
             case R.id.my_layout_method:
+                selectMethod();
                 break;
             case R.id.my_layout_device:
+                selectDevice();
                 break;
 
         }
+    }
+
+    /**
+     * 选择仪器
+     */
+    private void selectDevice() {
+        if (RxDataTool.isEmpty(mSampling.getMethodId())) {
+            showMessage("请先选择方法");
+            return;
+        }
+        Intent intent = new Intent();
+        intent.setClass(mContext, DeviceActivity.class);
+        intent.putExtra(DeviceActivity.METHOD_ID, mSampling.getMethodId());
+        new AvoidOnResult(getActivity()).startForResult(intent, new AvoidOnResult.Callback() {
+            @Override
+            public void onActivityResult(int resultCode, Intent data) {
+                if (resultCode == Activity.RESULT_OK) {
+                    String deviceId = data.getStringExtra("DeviceId");
+                    String deviceName = data.getStringExtra("DeviceName");
+                    String deviceCode = data.getStringExtra("DeviceCode");
+                    String sourceWay = data.getStringExtra("SourceWay");
+                    String expireDate = data.getStringExtra("ExpireDate");
+                    String deviceText;
+                    if (expireDate != null && !expireDate.equals("")) {
+                        String[] s = expireDate.split(" ");
+                        deviceText = String.format("%s(%s)(%s %s)", deviceName, deviceCode, sourceWay, s[0]);
+                    } else {
+                        deviceText = String.format("%s(%s)(%s %s)", deviceName, deviceCode, sourceWay, expireDate);
+                    }
+
+
+                    mSampling.setDeviceId(deviceId);
+                    mSampling.setDeviceName(deviceText);
+                    mSampling.setPrivateDataStringValue("SourceWay", sourceWay);
+                    mSampling.setPrivateDataStringValue("SourceDate", expireDate);
+                    //设备信息格式：仪器名称(仪器编号)(仪器溯源方式 仪器溯源有效期)
+                    mSampling.setPrivateDataStringValue("DeviceText", deviceText);
+
+                    tvTestDevice.setRightTextStr(deviceText);
+                }
+            }
+        });
+    }
+
+    /**
+     * 选择监测方法
+     */
+    private void selectMethod() {
+        if (RxDataTool.isEmpty(mSampling.getMethodId())) {
+            showMessage("请选择项目");
+            return;
+        }
+        Intent intent = new Intent();
+        intent.setClass(mContext, MonItemMethodActivity.class);
+        intent.putExtra(MonItemMethodActivity.MON_ITEM_ID, mSampling.getMethodId());
+        new AvoidOnResult(getActivity()).startForResult(intent, new AvoidOnResult.Callback() {
+
+            @Override
+            public void onActivityResult(int resultCode, Intent data) {
+                if (resultCode == Activity.RESULT_OK) {
+                    mSampling.setMethodId(data.getStringExtra("MethodId"));
+                    mSampling.setMethodName(data.getStringExtra("MethodName"));
+                    tvTestMethod.setRightTextStr(mSampling.getMethodName());
+
+                    //重置监测仪器
+                    mSampling.setDeviceName("");
+                    mSampling.setDeviceId("");
+                    tvTestDevice.setRightTextStr(mSampling.getDeviceName());
+                }
+            }
+        });
+
+    }
+
+    /**
+     * 选择时间
+     *
+     * @param b @true开始时间 false 结束时候
+     */
+    private void selectDate(boolean b) {
+        TimePickerViewUtils.showTimePickerView(mContext,
+                TimePickerViewUtils.YEAR_MONTH_DAY, new OnTimeSelectListener() {
+                    @Override
+                    public void onTimeSelect(Date date, View v) {
+                        String time = RxDateTool.getDate(RxDateTool.DATE_FORMAT,date);
+                        if (b) {
+                            tvTestStartDate.setRightTextStr(time);
+                            mSampling.setSamplingTimeBegin(time);
+                            mSampling.setSamplingNo(SamplingUtil.createSamplingNo(time));
+                            tvSamplingNo.setRightTextStr(mSampling.getSamplingNo());
+                        } else {
+                            tvTestEndDate.setRightTextStr(time);
+                            mSampling.setSamplingTimeEnd(time);
+                        }
+                    }
+                });
     }
 
     /**

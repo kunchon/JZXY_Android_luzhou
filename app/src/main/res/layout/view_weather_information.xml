@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_vertical"
     android:orientation="vertical">
 
@@ -22,6 +22,7 @@
         <TextView
             android:id="@+id/weather_arrow"
             style="@style/RightViewItemHintStyle"
+            android:layout_weight="1"
             android:hint=""
             android:rotation="0"
             android:text="" />

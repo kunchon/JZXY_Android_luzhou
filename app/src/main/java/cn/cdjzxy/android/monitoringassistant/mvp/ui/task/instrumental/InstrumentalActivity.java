@@ -86,7 +86,7 @@ public class InstrumentalActivity extends MyBaseViewPagerActivity {
 
         if (isNewCreate) {
             //是否是新建
-            mSampling = SamplingUtil.createInstrumentalSampling(projectId, formSelectId);
+            mSampling = SamplingUtil.createNewSampling(projectId, formSelectId);
         } else {
             //从数据库加载
             mSampling = DbHelpUtils.getDbSampling(samplingId);
@@ -138,7 +138,7 @@ public class InstrumentalActivity extends MyBaseViewPagerActivity {
             } else if (i == FRAGMENT_ITEM_INT_RECORD) {
                 tab.setTabName("监测结果");
                 tab.setSelected(false);
-                tab.setResId(R.mipmap.icon_monotor);
+                tab.setResId(R.mipmap.icon_monitor_result);
             }
             tabList.add(tab);
         }

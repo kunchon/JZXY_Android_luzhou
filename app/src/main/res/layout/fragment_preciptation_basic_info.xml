@@ -15,6 +15,7 @@
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:isShowRightTextView="true"
             app:leftText="采样日期"
+            app:drawableRight="@mipmap/ic_has_next"
             app:rightTextHint="请选择" />
         <include layout="@layout/view_line_basic_info" />
 
@@ -23,6 +24,7 @@
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:isShowRightTextView="true"
             app:leftText="采样人"
+            app:drawableRight="@mipmap/ic_has_next"
             app:rightTextHint="请选择" />
 
         <include layout="@layout/view_line_basic_info" />
@@ -32,6 +34,7 @@
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:isShowRightTextView="true"
             app:leftText="降水类型"
+            app:drawableRight="@mipmap/ic_has_next"
             app:rightTextHint="请选择" />
 
         <include layout="@layout/view_line_basic_info" />
@@ -41,6 +44,7 @@
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:isShowRightTextView="true"
             app:leftText="采样点位"
+            app:drawableRight="@mipmap/ic_has_next"
             app:rightTextHint="请选择" />
 
         <include layout="@layout/view_line_basic_info" />
@@ -48,9 +52,11 @@
         <cn.cdjzxy.android.monitoringassistant.widget.MyDrawableLinearLayout
             android:id="@+id/my_layout_sample_no"
             style="@style/MyDrawableLinearLayoutItemStyle"
-            app:isShowRightTextView="true"
+            app:isShowRightTextView="false"
+            app:drawableRight="@mipmap/ic_has_next"
             app:leftText="点位编号"
-            app:rightTextHint="请输入" />
+            app:rightEditTextHint="请输入"
+            app:rightTextHint="请选择" />
 
         <include layout="@layout/view_line_basic_info" />
 
@@ -69,8 +75,7 @@
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:isShowRightTextView="false"
             app:leftText="采样高度"
-            app:rightEditTextHint="请输入"
-            app:rightTextHint="系统自动生成" />
+            app:rightEditTextHint="请输入" />
 
         <include layout="@layout/view_line_basic_info" />
 
@@ -79,8 +84,7 @@
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:isShowRightTextView="false"
             app:leftText="采样器接雨面积（c㎡）"
-            app:rightEditTextHint="请输入"
-            app:rightTextHint="系统自动生成" />
+            app:rightEditTextHint="请输入" />
 
         <include layout="@layout/view_line_basic_info" />
 
@@ -89,8 +93,7 @@
             style="@style/MyDrawableLinearLayoutItemStyle"
             app:isShowRightTextView="true"
             app:leftText="采样方法"
-            app:rightEditTextHint="请输入"
-            app:rightTextHint="请选择" />
+            app:rightEditTextHint="请输入" />
 
         <include layout="@layout/view_line_basic_info" />
 
@@ -100,7 +103,8 @@
             app:isShowRightTextView="true"
             app:leftText="监测仪器名称、型号及编号（溯源信息）"
             app:rightEditTextHint="请输入"
-            app:rightTextHint="请选择" />
+            app:rightTextHint="请选择"
+            app:drawableRight="@mipmap/ic_has_next"/>
 
         <include layout="@layout/view_flow_information" />
 
@@ -146,7 +150,6 @@
 
         </LinearLayout>
 
-        <include layout="@layout/view_line_basic_info" />
 
     </LinearLayout>
 

@@ -51,10 +51,8 @@ import cn.cdjzxy.android.monitoringassistant.R;
 import cn.cdjzxy.android.monitoringassistant.app.EventBusTags;
 import cn.cdjzxy.android.monitoringassistant.base.base.fragment.BaseFragment;
 import cn.cdjzxy.android.monitoringassistant.base.mvp.IPresenter;
-import cn.cdjzxy.android.monitoringassistant.mvp.model.entity.user.UserInfoAppRight;
-import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.TaskActivity;
+import cn.cdjzxy.android.monitoringassistant.mvp.ui.task.activity.TaskActivity;
 import cn.cdjzxy.android.monitoringassistant.mvp.ui.wander.WanderTaskActivity;
-import cn.cdjzxy.android.monitoringassistant.user.UserInfoHelper;
 import cn.cdjzxy.android.monitoringassistant.utils.ArtUtils;
 import cn.cdjzxy.android.monitoringassistant.utils.DbHelpUtils;
 
